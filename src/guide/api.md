@@ -1,56 +1,115 @@
-# REST API Operations
+# API Reference
 
-The following API operations are available:
+The passwordless.dev API is used by your backend to initiate key registrations, verify signins, retrieve keys for end-users, and more.
 
-[[toc]]
+All requests made to the passwordless.dev API **require** your API [private secret](concepts) in the header for authentication.
 
-## Register - Create token
+## /register/token
 
-To register a credential for a user, your backend calls the passwordless api:
+### Request
 
-Required information:
+`POST` requests made to the `/register/token` endpoint create a FIDO2 WebAuthn credential for a user. The request body **must include** at least a `userId`, `username`, and `displayname`, for example:
+
+<CodeSwitcher :languages="{http:'HTTP',js:'JavaScript'}">
+<template v-slot:http>
 
 ```http
 POST https://v3.passwordless.dev/register/token HTTP/1.1
-ApiSecret: demo:secret:yyy
+ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 Content-Type: application/json
 
-{ "userId: "123, "username": "anders@passwordless.dev", "displayName": "Anders Åberg" }
+{
+  "userId": "107fb578-9559-4540-a0e2-f82ad78852f7",
+  "displayname": "Anders Åberg",
+  "username": "anders@passwordless.dev"
+}
 ```
-
-Response:
-
-```json
-"wWdDh02ItIvnCKT_02ItIvn..."
-```
-This token is used to begin a registration event.
-
-Additional parameters available in the POST request body:
+</template>
+<template v-slot:js>
 
 ```js
+const payload = {
+  "userId": "107fb578-9559-4540-a0e2-f82ad78852f7",
+  "displayname": "Anders Åberg",
+  "username": "anders@passwordless.dev",
+  "attType": "None",
+  "authType": "platform",
+  "userVerification": "preferred",
+  "expiresAt": "2021-08-01T14:43:03Z"
+};
+
+var token = await fetch(apiurl + "/register", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
+});
+```
+
+</template>
+</CodeSwitcher>
+
+The request body may include additional parameters besides those required, all of which are listed here:
+
+|Parameter        |Description          |Example Value  |
+|:-------------|:------------|:-----|
+|`userid`|WebAuthn userHandle. Maxium 64 bytes. Used to identify a user after succesful login.|`107fb578-9559-4540-a0e2-f82ad78852f7`|
+|`displayname`|WebAuthn display name, used in UI. Never stored in database.|`Anders Åberg`|
+|`username`|WebAuthn username, used in UI. Never stored in database.|`anders@passwordless.dev`|
+|`attType`|WebAuthn AttestationType, can be `direct`, `indirect` and `none`. Default is `none`.|`none`|
+|`userVerification`|WebAuthn AuthenticationType, can be `platform` (triggers faceid/touchid/windows hello) or `cross-platform` (triggers security-key). Default is platform.|`platform`|
+|`expiresAt`|Date & time when token is set to expire, encoded using UTC ISO 8601-1:2019. Defaults to current time in utc + 120 seconds.|`2021-08-01T14:43:03Z`|
+
+### Response
+
+If successful, the `/register/token` endpoint will send a registration token in a `.json` response, for example:
+
+```json
 {
-  userId: "123", // WebAuthn userHandle. Maxium 64 bytes. Used to identify a user after succesfull login.
-  displayname: "Anders Åberg", // WebAuthn displayname, used in UI. Never stored in database.
-  username: "anders@passwordless.dev", // WebAuthn username, used in UI. Never stored in database.
-  attType: "None", // WebAuthn AttestationType, can be "direct", "indirect" and "none. Default is none.
-  authType: "platform", // Webauthn AuthenticationType, can be "platform" (triggers faceid/touchid/windows hello) or "cross-platform" (triggers security-key). Default is platform.
-  userVerification: "preferred" // Webauhtn UserVerification. Can be "required", "preferred" or "discourage" . Default is preferred".
-  expiresAt: "2021-08-01T14:43:03Z", // Datetime when token is set to expire encoded using UTC ISO 8601-1:2019. Defaults to curren time in utc + 120seconds. 
+  "token": "wWdDh02ItIvnCKT_02ItIvn..."
 }
 ```
 
+This registration token will be stored by the registering device as a FIDO2 WebAuthn passkey for use in sign-in operations.
 
-## Sign in - Verify token
+## /signin/verify
+
+### Request
+`POST` requests made to the `/signin` endpoint verify a FIDO2 WebAuthn credential. The request body **must include** a valid token, which the end-users device would have obtained on [registration](#register), for example:
+
+<CodeSwitcher :languages="{http:'HTTP',js:'JavaScript'}">
+<template v-slot:http>
 
 ```http
 POST https://v3.passwordless.dev/signin/verify HTTP/1.1
-ApiSecret: demo:secret:yyy
+ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 Content-Type: application/json
 
-{ "token": "zzz" }
+{
+  "token": "wWdDh02ItIvnCKT_02ItIvn..."
+}
+```
+</template>
+<template v-slot:js>
+
+```js
+const payload = {
+  "token": "wWdDh02ItIvnCKT_02ItIvn..."
+};
+
+var token = await fetch(apiurl + "/signin", {
+    "method": "POST",
+    "body": JSON.stringify(payload),
+    "headers": { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
+});
 ```
 
-response:
+</template>
+</CodeSwitcher>
+
+### Response
+
+If successful, the `/signin/verify` endpoint will send a success response object, for example:
+
 ```json
 {
   "success": true,
@@ -66,80 +125,85 @@ response:
 
 ```
 
-## Alias
-Sets aliases for the userid, so that a sign in can be initiated with a username or email.
-Any existing aliases for that user are overwritten.
-Alias are only stored as a hash to ensure user privacy. They are never returned in any API respones.
+## /alias
 
-Rules:
-* Alias has to be unique to the specified userId. 
-* Alias can be maxium 250 chars long
-* Maximum of 10 alias
+### Request
 
-<CodeSwitcher :languages="{js:'JavaScript',http:'HTTP'}">
-<template v-slot:js>
+`POST` requests made to the `/alias` endpoint add aliases to a user, dictated by their `userID`, in order to allow sign-in with additional usernames, email addresses, etc. The request body **must include** the user's `userId` and a **complete** array of aliases, as pre-existing aliases are overwritten when the `POST` request is made, for example:
 
-```js
-// your backend app.js
-const payload = {
-    userId: "123",
-    aliases: ["anders@passwordless.dev"] // Allow signin to be initiated without knowing userid
-};
-
-// Make a HTTPS POST to `/register/token` with the UserId (using your ApiSecret)...
-var token = await fetch(apiurl + "/alias", {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: { ApiSecret: API_SECRET, 'Content-Type': 'application/json'}
-});
-```
-
-</template>
+<CodeSwitcher :languages="{http:'HTTP',js:'JavaScript'}">
 <template v-slot:http>
 
 ```http
-POST https://v3.passwordless.dev/alias
-ApiSecret: demo:secret:yyy
+POST https://v3.passwordless.dev/alias HTTP/1.1
+ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 Content-Type: application/json
 
-{ "UserId": "123", "aliases": ["anders@passwordless.dev"]} 
+{ "UserId": "123", "aliases": ["anders@passwordless.dev", "andersbackup@passwordless.dev"]}
+```
+</template>
+<template v-slot:js>
+
+```js
+const payload = {
+    "userId": "123",
+    "aliases": ["anders@passwordless.dev", "andersbackup@passwordless.dev"]
+};
+
+var token = await fetch(apiurl + "/alias", {
+    "method": "POST",
+    "body": JSON.stringify(payload),
+    "headers": { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
+});
 ```
 </template>
 </CodeSwitcher>
 
-## List Credentials for user
+A few rules to take into consideration when creating aliases:
+- An alias must be unique to the specified `userId`
+- An alias must be no more than 250 characters
+- A `userID` may have no more than 10 aliases associated with it
 
-List all credentials for a certain userId
+### Response
 
-<CodeSwitcher :languages="{js:'JavaScript',http:'HTTP'}">
-<template v-slot:js>
+ Alias are only stored as a hash to ensure user privacy, and are never returned in any API responses. If successful, the `/alias` endpoint will send a success response object, for example:
 
-```js
-// your backend app.js
-const payload = {
-    userId: "123"
-};
+ ```
 
-// Make a HTTPS POST to `/register/token` with the UserId (using your ApiSecret)...
-var credentials = await fetch(apiurl + "/credentials/list", {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: { ApiSecret: API_SECRET, 'Content-Type': 'application/json'}
-});
-```
-</template>
+ ```
+
+## /list
+### Request
+
+`GET` requests made to the `/list` endpoint list credentials associated with a user, as dictated by their `userId`. The request **must include** the `userId` in question, for example:
+
+<CodeSwitcher :languages="{http:'HTTP',js:'JavaScript'}">
 <template v-slot:http>
 
 ```http
 GET /credentials/list?userId=USERID HTTP/1.1
-ApiSecret: demo:secret:yyy
+ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
+```
+</template>
+<template v-slot:js>
+
+```js
+const payload = {
+    "userId": "123"
+};
+
+var credentials = await fetch(apiurl + "/credentials/list", {
+    "method": "POST",
+    "body": JSON.stringify(payload),
+    "headers": { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
+});
 ```
 </template>
 </CodeSwitcher>
 
+### Response
 
-
-Response 200 ok:
+If successful, the `/list` endpoint will send a success response object, for example:
 
 ```json
 [
@@ -161,13 +225,15 @@ Response 200 ok:
         "userHandle": "ODIzMzI2OTk2",
         "userId": "123",
         "nickname": "Home laptop"
-    }
+    },
+    ...
 ]
 ```
 
-## Delete credentials for user
+## /delete
+### Request
 
-Delete a certain credential for a user
+`POST` requests made to the `/delete` endpoint delete a specific credential associated with a user, as dictated by a `credentialId`. The request **must include** the `credentialId` in question, for example:
 
 ```http
 POST /credentials/delete HTTP/1.1
@@ -179,27 +245,37 @@ Content-Type: application/json
 }
 ```
 
-Returns 200 OK
+### Response
 
-## Others
+If successful, the `/delete` endpoint will send a success response object, for example:
 
-These API endpoints are secondary and/or internal.
+```JSON
 
-### Delete your account at passwordless.dev
+```
 
-If you want to delete your account and all data stored.
+## /account/delete
+### Request
 
-**Please note: This will not delete your data immediately.**
-All admin emails connected to the account will receive a warning email with a link to abort the deletion process.
-After 24 hours your API keys will be frozen.
-After 14 days your data will be permanently deleted.
+`POST` requests made to the `/account/delete` endpoint will delete your passwordless.dev account and all data stored in it. Data **will not be deleted immediately**, instead:
+
+1. Admin emails associated with the account will receive a warning email with a link to abort the deletion process.
+2. After 24 hours your API keys will be frozen.
+3. After 14 days your data will be permanently deleted.
+
+Requests must only include your API private secret, for example:
 
 ```http
 POST /account/delete HTTP/1.1
 ApiSecret: demo:secret:yyy
 ```
 
-Returns 200 OK
+### Response
+
+If successful, the `/account/delete` endpoint will send a success response object, for example:
+
+```json
+
+```
 
 <!-- ### Register - Begin
 
@@ -269,7 +345,7 @@ Content-Type: application/json
       "rawId":"M_HGNhr1ELH45hlEpVEE-Uek2YQOC_9_fmAS1yWsfH8",
       "type":"public-key",
       "extensions":{
-         
+
       },
       "response":{
          "AttestationObject":"o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVkBZ0mWDeWIDoxodDQXD2R2YFuP5K65ooYyx5lc87qDHZdjRQAAAAAAAAAAAAAAAAAAAAAAAAAAACAz8cY2GvUQsfjmGUSlUQT5R6TZhA4L_39-YBLXJax8f6QBAwM5AQAgWQEAxg1pNtQU3wuOg5X9Rbz5ofVlBD0hD2qQojpxx2_fPi89bd21DHyTNA2TDLLtu4czINYf7cbBU07I8_WY-sbDtQwHV38MvzI5dwaoa18F1InzOm5j2q7eYe-irBDB8-92G5FME6_rj11dYyjbx6nK2Tt9M2EkBKXNxyMGrowkW2CLMDVxeOaH8IyqJYWILM1R6eNrOk2TBczTO83zNE6rQN7pkZHPF1zsC5YRnpA32obkZQU-i4-Lubp5kV_64yy5kIIugog3O8CVSn43NNxukYG5r6VqD4C0By0rPqEJBm0F3WepP0I4M1rg7cVKCUK-GMwYR11drhzwnuxWY2MuDSFDAQAB",
@@ -341,7 +417,7 @@ Content-Type: application/json
       "rawId":"M_HGNhr1ELH45hlEpVEE-Uek2YQOC_9_fmAS1yWsfH8",
       "type":"public-key",
       "extensions":{
-         
+
       },
       "response":{
          "authenticatorData":"SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAQ",

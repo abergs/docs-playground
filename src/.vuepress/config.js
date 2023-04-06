@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Passwordless documentation',
+  title: 'docs.passwordless.dev',
 
   base: "/",
   /**
@@ -54,16 +54,19 @@ module.exports = {
     sidebar: {
       '/guide/': [
         {
-          title: 'Guide',
-          collapsable: true,
+          title: 'Passwordless Documentation',
+          collapsable: false,
           children: [
+            'releasenotes',
             '',
-            'demo-and-examples',
-            'getting-started',
-            'operations',
-            'passwordless-js-client',
-            'what-is-webauthn-and-fido2',
-            
+            'get-started',
+            'api',
+            'backend',
+            'js-client',
+            'frontend',
+            'admin-console',
+            'concepts',
+            'plans'
           ]
         }
       ],

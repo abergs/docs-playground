@@ -1,8 +1,8 @@
 ---
 home: true
-heroImage: ./hero.svg
-tagline: Sign in using fingerprint and Face ID
-actionText: Quick Start →
+heroImage: ./bumper.png
+tagline: Use open source and modern browser standards to build FIDO2 Webauthn applications for end users.
+actionText: Get Started
 actionLink: /guide/
 features:
 - title: W3C WebAuthn and FIDO2

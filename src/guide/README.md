@@ -1,42 +1,17 @@
+# About passwordless.dev
 
-# Overview
+Passwordless.dev is a software toolkit that helps web developers to support [FIDO2 WebAuthn passkeys]() for authentication by their end-users. Using passwordless.dev means there's no need to read ponderous W3C specification documentation, no need to determine what cryptography to implement, and no need to worry about managing stored public keys; the team behind Bitwarden does these things for you.
 
-Hey there, fellow web app developer! 👋
+Passwordless.dev wraps FIDO2 WebAuthn passkey functionality in an easy-to-use tools, designed to make it easier for web developers to adopt passkey-based authentication to meet the challenges of an ever-shifting cybersecurity landscape.
 
-This guide will help you **add Face/Fingerprint/Security Key sign in** to your webapp and understand:
+[INSERT DIAGRAM HERE]
 
-* What is passwordless.dev?
-* Why would you use it? What do you gain?
-* How does the passwordless.dev service work?
-* How does the underlying technique work?
+Architecturally, passwordless.dev consists of three key parts:
 
-<PasswordlessDemo />
-[Jump to example code →](demo-and-examples)
+- An [open-source client side library](js-client), used by your frontend to make requests to end-users browsers' WebAuthn API and requests to the passwordless.dev APIs.
+- A [public RESTful API](), used by your frontend to complete FIDO2 WebAuthn cryptographic exchanges with the browser.
+- A [private RESTful API](api), used by your backend to initiate key registrations, verify signins, and retrieve keys for end-users.
 
-## What is passwordless.dev?
-
-Passwordless.dev is a service that enables developers to use the next-gen technology for fast and secure sign in on the web - WebAuthn - without reading the w3c spec.
-
-> WebAuthn is a new W3C Standard that is now supported in most browser. It allows a user to sign into a webpage using a number of methods, such as: *FaceID, Fingerprint scanning, Windows Hello Credentials or Security Key*.
-
-**Passwordless.dev wraps all the complexity in using WebAuthn behind a simple API**. No need to worry about running the cryptography and storing public keys, we help you with that too.
-
-The team who built passwordless.dev are also the creators and maintainers behind the open source project fido2-net-lib, one of the first libraries to reach 100% compliance in conformance testing.
-
-## What do you gain from using it?
-
-The Passwordless API helps you **get started with WebAuthn in minutes rather than weeks.**
-WebAuthn is based on public key cryptography and which is quite complex. Passwordless.dev allows you to bring the features of WebAuthn to your users, rather than encoding key byte arrays correctly.
-
-Notable features:
-
-* Free starter plan
-* Handles all cryptography and key storage
-* Integrates nicely to your existing authentication
-* Fully featured REST API
-* Examples available (Node, PHP, .NET)
-* GDPR Compliace built in
-
-## Purpose
-
-We built passwordless.dev and the open source library to make it really easy for developers to adopt WebAuthn. Adopting WebAuthn makes your users and data better protected against hacks based on password re-use and phishing attacks.
+::: tip
+For more information on the guts of passwordless.dev check out [Concepts & Mechanics](concepts), otherwise we recommend heading straight to [Get Started](get-started).
+:::
