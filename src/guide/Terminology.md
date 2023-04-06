@@ -6,6 +6,11 @@ The Passwordless API utilizes three types of tokens:
 * **ApiSecret** ```example:secret:4fd1992..``` This is a Secret API key and should be well protected. It allows your backend to verify sign-ins and register keys on behalf of your users. (Create an account to get your API keys).
 * **Token** ```wWdD02ItIvnCKT...``` This is a ephemeral token (exists only temporarily) and is passed between the client, your backend and the Passwordless API. It encodes the status of an ongoing operation, such as registering a credential or signing in. You can think of it as a session or JSON web token (JWT).
 
+## How the Passwordless.dev API works with user infomration
+
+* The **Userid** is a unique string that represents the [WebAuthn Userhandle](https://www.w3.org/TR/webauthn-2/#dom-publickeycredentialuserentity-id). The userid is not meant to be displayed to a user and does not contain personally identifieable information (such as email, name). Authentication attempts are made with the userid and not individual names or display names. 
+* An **alias** is a user-facing reference to a userid. An alias is assigned to a userid for login purposes (username, email). Multiple alias' can be connected to a userid with the [Alias API](link) endpoint.
+
 
 ## What is FIDO2?
 
