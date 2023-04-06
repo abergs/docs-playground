@@ -20,7 +20,7 @@ POST https://v3.passwordless.dev/register/token
 ApiSecret: demo:secret:yyy
 Content-Type: application/json
 
-{ "UserId": "123", "username": "anders@passwordless.dev", "displayName": "Mr. Anders Åberg" }
+{ "UserId": "123", "username": "Jsmith@passwordlessuser.com", "displayName": "Mr. Joe Smith" }
 ```
 Response ```200 SUCCESS```
 
