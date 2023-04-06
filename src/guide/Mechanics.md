@@ -22,7 +22,7 @@ Content-Type: application/json
 
 { "UserId": "123", "username": "Jsmith@passwordlessuser.com", "displayName": "Mr. Joe Smith" }
 ```
-Response ```200 SUCCESS```
+Response ```200 OK```
 
 ```
 "register_wWdDh02ItIvnCKT_02ItIvn..."
@@ -60,7 +60,7 @@ var p = new Passwordless.Client({
     apiKey: "demo:public:6b08891222194fd1992465f8668f"
 });
 
-var alias = "anders@user.com"; // get username from input
+var alias = "John@user.com"; // get username from input
 
 // returns verify_yUf6_wWdDh02ItIvnCKT_02ItIvn...
 var token = await p.signinWithAlias(alias);
