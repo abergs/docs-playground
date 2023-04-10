@@ -12,10 +12,12 @@ The Passwordless API utilizes three types of tokens:
 
 
 ## What is FIDO2?
-FIDO2 is the umbrella term for branding of world wide web consortium standards (W3C). FIDO2 consistsn of two standardized comppmemts **WebAuthn** and **CTAP**. Together, these standards operate to create a secure, passwordless experience.
+FIDO2 is the umbrella term for branding of world wide web consortium standards (W3C). FIDO authentication standards were developed in order to provide authentication that is more secure standard passwords and SMS 2FA. Using FIDO suthentication standards provide a secure experience that is simpler for consumer to use and developer implementation. 
+
+FIDO2 consists of two standardized comppmemts **WebAuthn** and **CTAP**. Together, these standards operate to create a secure, passwordless experience.
 
 * **WebAuthn** is an API that connects a relying party to an application or login system. In a practical sense, WebAuthn creates an easy connection between the web and an application to allow passwordless authentication to occur. Learn more about WebAuthn at [Yubico](https://www.yubico.com/resource/why-webauthn-matters/)
-* **CTAP2** The CTAP2 components allows an external and portable authenticator (security key) to operate with a client platform. FIDO CTAP2 is responsible for the external factor, like a security key, communicating with a website or account via an authenticator.
+* **CTAP2** The client to authenticator protocol (CTAP)2 components allows an external and portable authenticator (security key) to operate with a client platform. FIDO CTAP2 is responsible for the external factor, like a security key, communicating with a website or account via an authenticator.
 
 In order to acheive FIDO2 compliance, the authentication process will incormporate both Webathn and CTAP2 standards.
 
