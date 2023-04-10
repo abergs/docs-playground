@@ -1,14 +1,5 @@
 # Concepts
 
-## What is passwordless?
-Passwordless login levelrages security standards and technology to change how we log in. Passwordless login methods are benneficial to users, making multifactor authenticaion more accessible and easy to properly use. Passwordless login methods may include:
-* [FaceID](https://support.apple.com/en-us/HT208108)
-* Biometric login
-* [Windows Hello](https://support.microsoft.com/en-us/windows/learn-about-windows-hello-and-set-it-up-dae28983-8242-bb2a-d3d1-87c9d265a5f0)
-* Credentials
-* [Security key](https://www.yubico.com/why-yubico/)
-
-
 ## Components of the Passwordless.dev API
 The Passwordless API utilizes three types of tokens:
 * **ApiKey** ```example:public:6b0861e..``` This is a Public API key, safe and intended to be included client side. It allows the browser to connect to out backend and initiate key negotiations and assertions.
