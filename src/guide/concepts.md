@@ -46,7 +46,7 @@ To better understand how Passwordless.dev works, we have provided illustrations 
 
 ## Credential workflow 
 
-[image location]
+![Passwordless Signing](/passwordless.register.png)
 
 The chart provides an illustration of the credential registration workflow with Passwordless.dev. Here is how the steps occur:
 
@@ -88,7 +88,7 @@ try {
 
 ## Sign-in flow
 
-[diagram locaiton]
+![Sign in](/passwordless.signin.png)
 
 The chart provides an illustration of the sign in process with Passwordless.dev. Here is how the steps occur:
 
