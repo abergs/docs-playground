@@ -18,7 +18,7 @@ When you sign up you'll land on the [Admin Console](admin-console), your primary
 
 ## Create an application
 
-Select the **Create Application** button and give your new application an **Application name** and **Description**. For each application, a set of [API keys](concepts) will be generated. You'll use these API keys for authentication with the passwordless.dev API. Save your public key and private secret somewhere safe, like [Bitwarden Secrets Manager](https://bitwarden.com/help/secrets-manager-overview).
+Select the **Create Application** button and give your new application an **Application name** and **Description**. For each application, a set of [API keys](concepts/#components-of-the-passwordlessdev-api) will be generated. You'll use these API keys for authentication with the passwordless.dev API. Save your public key and private secret somewhere safe, like [Bitwarden Secrets Manager](https://bitwarden.com/help/secrets-manager-overview).
 
 ## Install the library
 
@@ -30,7 +30,7 @@ import { Client } from '@passwordless/dev/passwordless-client';
 
 ## Build a registration flow
 
-Next, implement a workflow on your backend and frontend for registering a passkey. Code that you write to do this must:
+Next, implement a workflow on your backend and frontend for registering a [passkey](concepts/#passkey). Code that you write to do this must:
 
 <Badge text="backend" type="warning"/>
 1. Call the passwordless.dev API's `/register/token` endpoint ([learn more](api/#register-token)) with, at a minimum, a `userId`, `username`, and `displayname` for the user, for example:
@@ -98,7 +98,7 @@ if(verifiedUser.success === true) {
 }
 ```
 
-If the sign-in is cryptographically successful, a token is returned to the client, which then forwards the token to your backend.
+If the sign-in is cryptographically successful, a [token](concepts/#components-of-the-passwordlessdev-api) is returned to the client, which then forwards the token to your backend.
 
 <Badge text="backend" type="warning"/>
 2. Call the passwordless.dev API's `/signing/verify` endpoint ([learn more](api/#signin-verify)) with the user's token, for example:

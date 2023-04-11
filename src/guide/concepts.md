@@ -18,8 +18,10 @@ The Passwordless API utilizes three types of tokens:
 
 ## User information
 * The **Userid** is a unique string that represents the [WebAuthn Userhandle](https://www.w3.org/TR/webauthn-2/#dom-publickeycredentialuserentity-id). The userid is not meant to be displayed to a user and does not contain personally identifieable information (such as email, name). Authentication attempts are made with the userid and not individual names or display names. 
-* An **alias** is a user-facing reference to a userid. An alias is assigned to a userid for login purposes (username, email). Multiple alias' can be connected to a userid with the [Alias API](link) endpoint.
+* An **alias** is a user-facing reference to a userid. An alias is assigned to a userid for login purposes (username, email). Multiple alias' can be connected to a userid with the [Alias API](/api.md) endpoint.
 
+### Passkey
+Based on FIDO standards, passkeys are an alternitive to passwords, which provide faster, easier, and more secure sign-ins to websites and apps. Device-bound passkeys can operate on platforms across a user's device. Learn more about passkeys [here](https://fidoalliance.org/passkeys/).
 
 ### Security key
 A security key is an effective and popular method of adding two-factor authentication (2FA) to an account. A security key is a USB-like physical device that will store and handle cryptography. Security keys are based on FIDO2 authentication standards. 
