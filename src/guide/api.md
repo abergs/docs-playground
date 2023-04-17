@@ -4,6 +4,17 @@ The passwordless.dev API is used by your backend to initiate key registrations, 
 
 All requests made to the passwordless.dev API **require** your API [private secret](concepts) in the header for authentication.
 
+### API status code reference
+|HTTP Code|Message|Status|
+|----|----|----|
+|200|Everything is OK|:green_circle:|
+|201|Everything is OK but empty|:yellow_circle:|
+|400|Bad request|:red_circle:|
+|401|You did not identify yourself|:red_circle:|
+|409|Conflict (alias is already in use)|:red_circle:|
+|500|Something went very wrong and we have a bug|:red_circle:|
+
+
 ## /register/token
 
 ### Request
