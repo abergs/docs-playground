@@ -14,8 +14,16 @@ In order to acheive FIDO2 compliance, the passwordless.dev authentication proces
 
 The FIDO2 specification defines several user identifiers which are or can be used by passwordless.dev in various registration and sign-in operations:
 
-- The **Userid** is a unique string that represents the [WebAuthn Userhandle](https://www.w3.org/TR/webauthn-2/#dom-publickeycredentialuserentity-id). The userid is not meant to be displayed to a user and does not contain personally identifieable information (such as email, name). Authentication attempts are made with the userid and not individual names or display names.
-- An **alias** is a user-facing reference to a userid. An alias is assigned to a userid for login purposes (username, email). Multiple alias' can be connected to a userid with the [Alias API](api/#alias) endpoint.
+- A **UserId** is
+
+
+is a unique string that represents the [WebAuthn Userhandle](https://www.w3.org/TR/webauthn-2/#dom-publickeycredentialuserentity-id). The userid is not meant to be displayed to a user and does not contain personally identifieable information (such as email, name). Authentication attempts are made with the userid and not individual names or display names.
+- A **username** is
+- A **display name** is
+- An **alias** is a user-facing reference to a `userId` which allows sign-in with additional usernames, email addresses, etc. By default, aliases are hashed before being stored to preserve user privacy. Multiple aliases can be set for a `userId` by making requests to the `/alias` endpoint ([learn more](api.html#alias)), however the following rules should be taken into consideration when allowing users to create aliases:
+  - An alias must be unique to the specified `userId`.
+  - An alias must be no more than 250 characters.
+  - A `userId` may have no more than 10 aliases associated with it.
 
 ## passwordless.dev
 
@@ -29,10 +37,26 @@ Architecturally, passwordless.dev consists of three key parts:
 
 ### API keys
 
-Registering an application with the [passwordless.dev admin console](get-started.html#create-an-application) will a set of API keys:
+Registering an application with the [passwordless.dev admin console](get-started.html#create-an-application) will create a set of API keys:
 
-- **ApiKey**: A public API key, safe and intended to be included client side. It allows the browser to connect to out backend and initiate key negotiations and assertions.
-- **ApiSecret**: Am private API key, or private secret, that should be well protected. It allows your backend to verify sign-ins and register keys on behalf of your users.
+- **ApiKey**: A public API key, safe and intended to be included client side. It allows the browser to connect to out backend and initiate key negotiations and assertions. Public API keys are in the format:
+  ```
+  <application-name>:public:<guid>
+  ```
+- **ApiSecret**: A private API key, or private secret, that should be well protected. It allows your backend to verify sign-ins and register keys on behalf of your users. Private API secrets are in the format:
+
+  ```
+  <application-name>:secret:<guid>
+  ```
+
+### Credentials
+A credential represents a FIDO2 authenticator that is registered by passwordless.dev for a user. Examples of credentials include [device-bound passkeys](https://fidoalliance.org/passkeys/) and [hardware security keys](https://www.yubico.com/products/security-key/). For each credential, the following information is stored:
+
+|Test|Test|
+|----|----|
+|x|y|
+|z|q|
+
 
 ### Tokens
 In the regular course of business, passwordless.dev uses two important types of ephemeral tokens:
@@ -41,13 +65,6 @@ In the regular course of business, passwordless.dev uses two important types of 
 - A **verification token**, created by the public API from calls to the `.signin()` method ([learn more](js-client.html#signin)). Your backend will verify this token to complete a sign-in operation
 
 ## More terms
-
-### Passkey
-Based on FIDO standards, passkeys are an alternitive to passwords, providing faster, easier, and more secure sign-ins to websites and apps. Device-bound passkeys can operate on platforms across a user's device. Learn more about passkeys [here](https://fidoalliance.org/passkeys/).
-
-### Security key
-A security key is an effective and popular method of adding two-factor authentication (2FA) to an account. A security key is a USB-like physical device that will store and handle cryptography. Security keys are based on FIDO2 authentication standards.
-See [Yubico](https://www.yubico.com/products/security-key/) to learn more about security keys.
 
 ### Relying party
 The relying party (RP) is the server that process requests for access to a resource. A web application that verifies a users credentials during an access request would be an example of a RP.
