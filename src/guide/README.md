@@ -13,5 +13,5 @@ Architecturally, passwordless.dev consists of three key parts:
 - A [private RESTful API](api), used by your backend to initiate key registrations, verify signins, and retrieve keys for end-users.
 
 ::: tip
-For more information on the guts of passwordless.dev check out [Concepts & Mechanics](concepts), otherwise we recommend heading straight to [Get Started](get-started).
+For more information on the guts of passwordless.dev check out [Mechanics](concepts), otherwise we recommend heading straight to [Get Started](get-started).
 :::
