@@ -1,12 +1,12 @@
 # Get Started
 
-Passwordless.dev is a software toolkit that helps web developers to support FIDO2 WebAuthn passkeys for authentication by their end-users. In this guide, we'll chart the quickest path to implementing passwordless.dev for your website.
+Passwordless.dev is a software toolkit that helps web developers to support [FIDO2 WebAuthn passkeys](concepts) for authentication by their end-users. In this guide, we'll chart the quickest path to implementing passwordless.dev for your website.
 
 ::: tip
-This guide will skip over some conceptual basics in order to get you started as quickly as possible. Check out [Concepts & Mechanics](concepts) for in-depth discussion of the ideas used by passwordless.dev.
+This guide will skip over some conceptual basics in order to get you started as quickly as possible. Check out [Concepts](concepts) for in-depth discussion of the ideas used by passwordless.dev.
 :::
 
-In this guide we'll provide JavaScript examples, however you can check out sample code, guidelines, and tips for other languages in [Backend Languages](backend) and [Frontend Frameworks](frontend).
+In this guide we'll provide JavaScript examples, however you can check out sample code, guidelines, and tips for other toolkits in [Backend Languages](backend) and [Frontend Frameworks](frontend).
 
 ## Sign up
 
@@ -18,109 +18,174 @@ When you sign up you'll land on the [Admin Console](admin-console), your primary
 
 ## Create an application
 
-Select the **Create Application** button and give your new application an **Application name** and **Description**. For each application, a set of [API keys](concepts/#components-of-the-passwordlessdev-api) will be generated. You'll use these API keys for authentication with the passwordless.dev API. Save your public key and private secret somewhere safe, like [Bitwarden Secrets Manager](https://bitwarden.com/help/secrets-manager-overview).
+Select the **Create Application** button and give your new application an **Application name** and **Description**. For each application, a set of [API keys](concepts.html#components-of-the-passwordless-dev-api) will be generated. You'll use these API keys for authentication with the passwordless.dev API. Save your public key and private secret somewhere safe, like [Bitwarden Secrets Manager](https://bitwarden.com/help/secrets-manager-overview).
 
 ## Install the library
 
-Next, install the [passwordless.dev JavaScript client library](js-client), either globally or as an ES6 module within your application. This library will allow your application to interact with the passwordless.dev API and with browsers' WebAuthn API. To install the library:
+Next, install the [passwordless.dev JavaScript client library](js-client), either globally or as a module within your application. This library will allow your application to interact with the passwordless.dev API and with browsers' WebAuthn API. To install the library:
 
-```npm
-import { Client } from '@passwordless/dev/passwordless-client';
+
+<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',http:'http'}">
+<template v-slot:bash1>
+
+```bash
+yarn add @passwordlessdev/passwordless-client
 ```
+For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+```js
+import { Client } from '@passwordlessdev/passwordless-client';
+```
+</template>
+<template v-slot:bash2>
+
+```bash
+npm install @passwordlessdev/passwordless-client
+```
+For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+```js
+import { Client } from '@passwordlessdev/passwordless-client';
+```
+</template>
+<template v-slot:es6>
+
+```http
+<script src="https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs" crossorigin="anonymous"></script>
+```
+For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+```js
+import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs"
+```
+</template>
+<template v-slot:http>
+
+```http
+<script src="https://cdn.passwordless.dev/dist/0.4.0/passwordless.iife.js" crossorigin="anonymous"></script>
+```
+For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+```http
+<script>
+var p = new Passwordless.Client({});
+</script>
+```
+
+</template>
+</CodeSwitcher>
 
 ## Build a registration flow
 
-Next, implement a workflow on your backend and frontend for registering a [passkey](concepts/#passkey). Code that you write to do this must:
+Next, implement a workflow on your backend and frontend for registering a [passkey](concepts.html#passkey). Code that you write to do this must:
 
 <Badge text="backend" type="warning"/>
 1. Call the passwordless.dev API's `/register/token` endpoint ([learn more](api/#register-token)) with, at a minimum, a `userId`, `username`, and `displayname` for the user, for example:
 
 ```js
+const apiUrl = "https://v3.passwordless.dev";
+
 const payload = {
-  "userId": "107fb578-9559-4540-a0e2-f82ad78852f7",
-  "displayname": "Anders Åberg",
-  "username": "anders@passwordless.dev",
-  "attType": "None",
-  "authType": "platform",
-  "userVerification": "preferred",
-  "expiresAt": "2021-08-01T14:43:03Z"
+  "userId": "107fb578-9559-4540-a0e2-f82ad78852f7", // A WebAuthn User Handle, which should be generated by your application. Max. 64 bytes.
+  "displayname": "Phillip J. Fry", // A human-palatable name for the account, which should be chosen by the user.
+  "username": "pjfry@passwordless.dev", // A username used for user authentication, should be chosen by the user.
+  "attType": "None", // WebAuthn attestation conveyance. Can be "none" (default), "direct", or "indirect".
+  "authType": "platform", // WebAuthn authenticator attachment modality. Can be "platform" (default), which triggers client device-specific options Windows Hello, FaceID, or TouchID, or "cross-platform", which triggers roaming options like security keys.
+  "userVerification": "preferred", // Whether the relying party requires locally-invoked authorization for the operation. Can be "preferred" (default), "required", or "optional".
+  "expiresAt": "3023-08-01T14:43:03Z" // Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.
 };
 
-var token = await fetch(apiurl + "/register", {
+// POST the payload to the passwordless.dev API using your API private secret.
+var token = await fetch(apiUrl + "/register", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
 });
 ```
 
-Successful implementation will return a registration token to the client, for example:
+Successful implementation will create a registration token returned that is returned as a string, for example:
 
 ```json
-{
-  "token": "wWdDh02ItIvnCKT_02ItIvn..."
-}
+"wWdDh02ItIvnCKT_02ItIvn..."
 ```
 
 <Badge text="frontend" type="tip"/>
 2. Initiate, client-side, the WebAuthn process to create and store a WebAuthn credential using the returned token ([learn more](js-client)), for example:
 
 ```js
+const apiUrl = "https://v3.passwordless.dev";
+
+// Instantiate a passwordless client using your API public key.
 var p = new Passwordless.Client({
-    apiKey: "demo:public:6b08891222194fd1992465f8668f"
+    apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
-var myToken = await fetch("/example-backend/passwordless/token").then(r => r.text());
+// Fetch the returned registration token from the backend.
+var myToken = await fetch(apiUrl + "/create-token?userId" + userId).then(r => r.text());
 
+// Register the token with the end-user's device.
 try {
     await p.register(myToken);
 } catch (e) {
 }
 ```
 
+Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save the public key to the database for future sign-in operations.
+
 ## Build a signin flow
 
-Next, implement a workflow on your backend and frontend for signing in with a passkey. Code that you write must:
+Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#passkey). Code that you write must:
 
 <Badge text="frontend" type="tip"/>
 1. Call the passwordless.dev API's `/signin` endpoint ([learn more](js-client)) with the user's `userId` or alias to initiate the backend operation to verify the user's token, for example:
 
 ```js
+const apiUrl = "https://v3.passwordless.dev";
+
+// Instantiate a passwordless client using your API public key.
 var p = new Passwordless.Client({
-    apiKey: "demo:public:6b08891222194fd1992465f8668f"
+    apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
-var alias = "anders@user.com";
+// Allow the user to specify a username or alias.
+var alias = "pjfry@passwordless.dev";
 
+// Generate a verification token for the user.
 var token = await p.signinWithAlias(alias);
 
-var verifiedUser = await fetch("/example-backend/passwordless/signin?token=" + token).then(r => r.json());
+// Check that the token was successfully generated for the sign-in.
+var verifiedUser = await fetch(apiUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
+  // Succeed!
 }
 ```
 
-If the sign-in is cryptographically successful, a [token](concepts/#components-of-the-passwordlessdev-api) is returned to the client, which then forwards the token to your backend.
+Successful implementation will negotiate verification of the WebAuthn credential through the user's web browser API and return a verification [token](concepts.html#components-of-the-passwordlessdev-api) to the client, which can then be used by your backend to complete the sign-in.
 
 <Badge text="backend" type="warning"/>
 2. Call the passwordless.dev API's `/signing/verify` endpoint ([learn more](api/#signin-verify)) with the user's token, for example:
 
 ```js
+const apiUrl = "https://v3.passwordless.dev";
+
+// Fetch the verification token from your frontend.
 const token = { token: req.query.token };
 
+// POST the verification token to the passwordless.dev API using your API private secret.
 const response = await fetch(apiurl + "/signin/verify", {
     method: "POST",
     body: JSON.stringify(token),
-    headers: { ApiSecret: API_SECRET, 'Content-Type': 'application/json' }
+    headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json" }
 });
 
+// Cache the API response (see below) to a variable.
 var body = await response.json();
+
+// Check the API response for successful verification.
 if (body.success) {
-    console.log("Succesfully verfied signin for user", body);
+    console.log("Successfully verified sign-in for user.", body);
 } else {
-    console.warn("Sign in failed", body);
+    console.warn("Sign in failed.", body);
 }
 ```
 
-Successful implementation will return a success response including the user's `userId`, for example:
+Successful implementation of the above `POST` will return a success response including the user's `userId`, for example:
 
 ```json
 {
