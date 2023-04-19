@@ -2,18 +2,18 @@
 Passwordless.dev offers different plans to meet your security needs. Free and paid plans are available to add security your projects, products, or product teams.
 
 #### All Passwordless.dev plans will offer:
-* FIDO2 specifications for authentication. 
+* FIDO2 specifications for authentication.
 * WebAuthn standards for secure authentication.
 * CTAP2 communication between systems and external authenticators.
 * Use of open source fido2-net-lib.
 * Support for several frameworks including: Node.js, ASP.NET, PHP, and Python.
-* Fully featured Passwordless API for use with any language. 
+* Fully featured Passwordless API for use with any language.
 * Admin console access for creating, configuring, monitoring, and managing your app.
 * Github access for support and SDKs.
 * Support with major browsers.
 
 
-![get started](./CleanShot%202023-04-12%20at%2020.54.05%402x.png)
+<!-- ![get started](./CleanShot%202023-04-12%20at%2020.54.05%402x.png) -->
 
 ## Passwordless plans
 
@@ -28,7 +28,7 @@ Passwordless.dev offers different plans to meet your security needs. Free and pa
 ## Select the plan that is right for you organization
 
 ![Developer plan](./developer-pricing.png)
-The developer plan is the free teir of Passwordless.dev. With this plan we aim to support community projects and spread the adoption of passwordless technologies. 
+The developer plan is the free teir of Passwordless.dev. With this plan we aim to support community projects and spread the adoption of passwordless technologies.
 
 Where to use the features of Developer plan:
 * Sign up
@@ -63,11 +63,4 @@ Below is a quick reference for the approachable pricing structure that Passwordl
 
 ## Were you a Paswordless.dev beta user?
 
-Once the Passwordless.dev beta program has ended, users will be transitioned into a passwordless.dev plan. Free plans will still be available once Passwordless.dev has entered GA. Prior to the GA release, all beta users will be notified and have the option to opt-in to a paid plan. 
-
-
-
-
-
-
-
+Once the Passwordless.dev beta program has ended, users will be transitioned into a passwordless.dev plan. Free plans will still be available once Passwordless.dev has entered GA. Prior to the GA release, all beta users will be notified and have the option to opt-in to a paid plan.
