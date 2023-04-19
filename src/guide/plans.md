@@ -27,14 +27,14 @@ Passwordless.dev offers different plans to meet your security needs. Free and pa
 
 ## Select the plan that is right for you organization
 
-![Developer plan](./developer-pricing.png)
+<!-- ![Developer plan](./developer-pricing.png) -->
 The developer plan is the free teir of Passwordless.dev. With this plan we aim to support community projects and spread the adoption of passwordless technologies.
 
 Where to use the features of Developer plan:
 * Sign up
 * Sign in
 
-![Pro plan](./pro-pricing.png)
+<!-- ![Pro plan](./pro-pricing.png) -->
 The pro plan brings Passwordless and FIDO2 to and brings it to your large scale application
 
 Where to use the features of Pro plan:
