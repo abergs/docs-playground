@@ -7,7 +7,7 @@ Passwordless.dev offers different plans to meet your security needs. Free and pa
 * CTAP2 communication between systems and external authenticators.
 * Use of open source fido2-net-lib.
 * Support for several frameworks including: Node.js, ASP.NET, PHP, and Python.
-* Fully featured Passwordless API for use with any language.
+* Fully featured passwordless API for use with any language.
 * Admin console access for creating, configuring, monitoring, and managing your app.
 * Github access for support and SDKs.
 * Support with major browsers.
