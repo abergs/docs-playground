@@ -31,7 +31,7 @@ Next, install the [passwordless.dev JavaScript client library](js-client), eithe
 ```bash
 yarn add @passwordlessdev/passwordless-client
 ```
-For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by passwordless.dev:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
 ```
@@ -41,7 +41,7 @@ import { Client } from '@passwordlessdev/passwordless-client';
 ```bash
 npm install @passwordlessdev/passwordless-client
 ```
-For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by passwordless.dev:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
 ```
@@ -51,7 +51,7 @@ import { Client } from '@passwordlessdev/passwordless-client';
 ```http
 <script src="https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs" crossorigin="anonymous"></script>
 ```
-For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by passwordless.dev:
 ```js
 import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs"
 ```
@@ -61,7 +61,7 @@ import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min
 ```http
 <script src="https://cdn.passwordless.dev/dist/0.4.0/passwordless.iife.js" crossorigin="anonymous"></script>
 ```
-For all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by passwordless.dev:
 ```http
 <script>
 var p = new Passwordless.Client({});
@@ -73,10 +73,10 @@ var p = new Passwordless.Client({});
 
 ## Build a registration flow
 
-Next, implement a workflow on your backend and frontend for registering a [passkey](concepts.html#passkey). Code that you write to do this must:
+Next, implement a workflow on your backend and frontend for registering a [passkey](concepts.html#credentials). Code that you write to do this must:
 
 <Badge text="backend" type="warning"/>
-1. Call the passwordless.dev API's `/register/token` endpoint ([learn more](api/#register-token)) with, at a minimum, a `userId`, `username`, and `displayname` for the user, for example:
+1. Generate a [registration token](concepts.html#tokens) by calling the passwordless.dev API's `/register/token` endpoint ([learn more](api/#register-token)) with, at a minimum, a `userId`, `username`, and `displayname` for the user, for example:
 
 ```js
 const apiUrl = "https://v3.passwordless.dev";
@@ -106,7 +106,7 @@ Successful implementation will create a registration token returned that is retu
 ```
 
 <Badge text="frontend" type="tip"/>
-2. Initiate, client-side, the WebAuthn process to create and store a WebAuthn credential using the returned token ([learn more](js-client)), for example:
+2. Initiate, client-side, the WebAuthn process to create and store a WebAuthn credential using the generated registration token ([learn more](js-client)), for example:
 
 ```js
 const apiUrl = "https://v3.passwordless.dev";
@@ -130,10 +130,10 @@ Successful implementation will prompt passwordless.dev to negotiate creation of 
 
 ## Build a signin flow
 
-Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#passkey). Code that you write must:
+Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#credentials). Code that you write must:
 
 <Badge text="frontend" type="tip"/>
-1. Generate, client-side, a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. Include the user's `userId` or alias ([learn more]()js-client.html#signin), for example:
+1. Generate, client-side, a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. Include the user's `userId` or alias ([learn more](js-client.html#signin)), for example:
 
 ```js
 const apiUrl = "https://v3.passwordless.dev";
@@ -156,10 +156,10 @@ if(verifiedUser.success === true) {
 }
 ```
 
-Successful implementation will negotiate verification of the WebAuthn credential through the user's web browser API and return a verification [token](concepts.html#components-of-the-passwordlessdev-api) to the client, which can then be used by your backend to complete the sign-in.
+Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (**step 2**) before proceeding to act on the confirmed sign-in
 
 <Badge text="backend" type="warning"/>
-2. Call the passwordless.dev API's `/signing/verify` endpoint ([learn more](api/#signin-verify)) with the user's token, for example:
+2. Validate the verification token by calling the passwordless.dev API's `/signin/verify` endpoint ([learn more](api/#signin-verify)) with generated token, for example:
 
 ```js
 const apiUrl = "https://v3.passwordless.dev";
@@ -201,6 +201,8 @@ Successful implementation of the above `POST` will return a success response inc
   "expiresAt": "2021-08-01T01:35:36.9773193Z"
 }
 ```
+
+Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in (**step 1**).
 
 ## Next steps
 
