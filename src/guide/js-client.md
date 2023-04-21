@@ -1,6 +1,8 @@
 # JavaScript Client Reference
 
-The passwordless.dev JavaScript client is used by your frontend to make requests to end-users browsers' WebAuthn API and requests to the passwordless.dev APIs.
+The passwordless.dev JavaScript client is used by your frontend to complete FIDO2 WebAuthn cryptographic exchanges with the browser.
+
+All methods **require** your API [public key](concepts.html#api-keys) for authentication. Requests made to the [private API](api) will instead require your API [private secret](concepts.html#api-keys).
 
 ## Installation
 
@@ -12,7 +14,7 @@ To install the passwordless.dev JavaScript client:
 ```bash
 yarn add @passwordlessdev/passwordless-client
 ```
-For all cases, your frontend must import the library to call the methods in this document:
+In all cases, your frontend must import the library to call the methods in this document:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
 ```
@@ -22,7 +24,7 @@ import { Client } from '@passwordlessdev/passwordless-client';
 ```bash
 npm install @passwordlessdev/passwordless-client
 ```
-For all cases, your frontend must import the library to call the methods in this document:
+In all cases, your frontend must import the library to call the methods in this document:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
 ```
@@ -32,7 +34,7 @@ import { Client } from '@passwordlessdev/passwordless-client';
 ```http
 <script src="https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs" crossorigin="anonymous"></script>
 ```
-For all cases, your frontend must import the library to call the methods in this document:
+In all cases, your frontend must import the library to call the methods in this document:
 ```js
 import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs"
 ```
@@ -42,7 +44,7 @@ import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min
 ```http
 <script src="https://cdn.passwordless.dev/dist/0.4.0/passwordless.iife.js" crossorigin="anonymous"></script>
 ```
-For all cases, your frontend must import the library to call the methods in this document:
+In all cases, your frontend must import the library to call the methods in this document:
 ```http
 <script>
 var p = new Passwordless.Client({});
@@ -54,21 +56,31 @@ var p = new Passwordless.Client({});
 
 ## .register()
 
-Call the `.register()` method to fetch a token from your backend to register with the end-user's device, for example:
+Call the `.register()` method to fetch a [registration token](concepts.html#tokens) from your backend to authorize creation of a WebAuthn credential on the end-user's device, for example:
 
 ```js
+const apiUrl = "https://v3.passwordless.dev";
 
-const p = new Passwordless.Client({ apiKey: "demo:public:6b08891222194fd1992465f8668f" });
-const myToken = "...";
+// Instantiate a passwordless client using your API public key.
+var p = new Passwordless.Client({
+    apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
+});
+
+// Fetch the registration token from the backend.
+var myToken = await fetch(apiUrl + "/create-token?userId" + userId).then(r => r.text());
+
+// Register the token with the end-user's device.
 try {
     await p.register(myToken);
-  } catch (e) {
+} catch (e) {
 }
 ```
 
+Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
+
 ## .signin()
 
-Call `.signin()` methods to trigger token verification on your backend. There are a few different `.signin()` methods available:
+Call `.signin()` methods to generate a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. There are a few different `.signin()` methods available:
 
 |Method|Description|Example|
 |------|-----------|-------|
@@ -77,35 +89,41 @@ Call `.signin()` methods to trigger token verification on your backend. There ar
 |`.signInWithId`||`verify_token = await p.signInWithId(userId);`|
 
 ```js
-const p = new Passwordless.Client({ apiKey: "demo:public:6b08891222194fd1992465f8668f" });
+const apiUrl = "https://v3.passwordless.dev";
+
+// Instantiate a passwordless client using your API public key.
+var p = new Passwordless.Client({
+    apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
+});
+
+// Allow the user to specify a username or alias.
+var alias = "pjfry@passwordless.dev";
+
+// Generate a verification token for the user.
 try {
     let verify_token = null;
-    // alternative 1:
-    // use autofill to sign in. This enables browsers to suggest passkeys for any input that has autofill="webauthn",
-    // e.g. <input type="text" placeholder="Your email" autofill="username email webauthn" />
+    // Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn".
     verify_token = await p.signinWithAutofill();
-    // alternative 2:
-    // Not specyfing an alias will allow the user to select any available credentials on the device or insert a security key
-    verify_token = await p.signinWithAlias(null);
-    // alternative 3:
-    // Use an alias as inputed by the user to authenticate the user
-    const email = ""; // get email from input field
+    // Option 2: Use an alias specified by the user.
+    const email = "pjfry@passwordless.dev";
     verify_token = await p.signinWithAlias(email);
-    // alternative 4:
-    // If you know the userid beforehand (e.g. they are already logged in but you want to re-auth them)
-    // You can use signInWithId to do a re-auth
-    const userId = ""; // fetch userid from database or localstorage
+    // Option 3: Do not specify an alias to allow the user to select any available credentials on the device or insert a security key.
+    verify_token = await p.signinWithAlias(null);
+    // Option 4: Use a userId if already known, for example if the user is re-authenticating.
+    const userId = "107fb578-9559-4540-a0e2-f82ad78852f7";
     verify_token = await p.signInWithId(userId);
-    // success!
-    // todo: call your backend to verify the verify_token
-} catch (e) {
-    // error    
+}
+
+// Call your backend to verify the generated token.
+var verifiedUser = await fetch(apiUrl + "/signin?token=" + token).then(r => r.json());
+if(verifiedUser.success === true) {
+  // If successful, proceed!
 }
 ```
 
 ## .isBrowserSupported()
 
-Call the `.isBrowserSupported()` static method to check if the end-user's browser supports FIDO2 WebAuth passkey-based authentication, for example:
+Call the static `.isBrowserSupported()` method to check if the end-user's browser supports FIDO2 WebAuth passkey-based authentication, for example:
 
 ```js
 
@@ -117,7 +135,7 @@ if (Passwordless.isBrowserSupported() === true) {
 ## .isPlatformSupported()
 
 
-Call the `.isPlatformSupported()` static async method to check if the end-users device supports platform authentication, for example:
+Call the static async `.isPlatformSupported()` method to check if the end-users device or browser supports platform authentication like Windows Hello, for example:
 
 ```js
 if (await Passwordless.isPlatformSupported() === true) {
@@ -127,7 +145,7 @@ if (await Passwordless.isPlatformSupported() === true) {
 
 ## .isAutofillSupported()
 
-Call the `.isAutofillSupported()` static async method to check if the end-user's device supports ________, for example:
+Call the static async `.isAutofillSupported()` method to check if the end-user's device or browser supports listing passkeys in an auto-fill dialog, for example:
 
 ```js
 

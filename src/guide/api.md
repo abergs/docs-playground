@@ -132,7 +132,7 @@ If successful, the `/signin/verify` endpoint will return a success response obje
 }
 ```
 
-Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in.
+Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in ([learn more]()js-client.html#signin).
 
 ## /alias
 

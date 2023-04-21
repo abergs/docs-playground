@@ -126,14 +126,14 @@ try {
 }
 ```
 
-Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save the public key to the database for future sign-in operations.
+Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
 
 ## Build a signin flow
 
 Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#passkey). Code that you write must:
 
 <Badge text="frontend" type="tip"/>
-1. Call the passwordless.dev API's `/signin` endpoint ([learn more](js-client)) with the user's `userId` or alias to initiate the backend operation to verify the user's token, for example:
+1. Generate, client-side, a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. Include the user's `userId` or alias ([learn more]()js-client.html#signin), for example:
 
 ```js
 const apiUrl = "https://v3.passwordless.dev";
@@ -149,10 +149,10 @@ var alias = "pjfry@passwordless.dev";
 // Generate a verification token for the user.
 var token = await p.signinWithAlias(alias);
 
-// Check that the token was successfully generated for the sign-in.
+// Call your backend to verify the generated token.
 var verifiedUser = await fetch(apiUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
-  // Succeed!
+  // If successful, proceed!
 }
 ```
 
