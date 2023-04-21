@@ -4,7 +4,7 @@ Passwordless.dev is a software toolkit that helps web developers to support [FID
 
 Passwordless.dev wraps FIDO2 WebAuthn passkey functionality in an easy-to-use tools, designed to make it easier for web developers to adopt passkey-based authentication to meet the challenges of an ever-shifting cybersecurity landscape.
 
-![Passwordless.dev operation flow](./Passwordless%20wo%203rd%20party.png)
+![Passwordless.dev operation flow](./diagram.png)
 
 Architecturally, passwordless.dev consists of three key parts:
 
