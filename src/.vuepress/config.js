@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'docs.passwordless.dev',
+  title: '[DRAFT] Documentation for Passwordless.dev',
 
   base: "/",
   /**
