@@ -20,6 +20,10 @@ When you sign up you'll land on the [Admin Console](admin-console), your primary
 
 Select the **Create Application** button and give your new application an **Application name** and **Description**. For each application, a set of [API keys](concepts.html#components-of-the-passwordless-dev-api) will be generated. You'll use these API keys for authentication with the passwordless.dev API. Save your public key and private secret somewhere safe, like [Bitwarden Secrets Manager](https://bitwarden.com/help/secrets-manager-overview).
 
+:::warning
+It's important to download your API keys to a safe place, as they will be removed from the admin console after 7 days.
+:::
+
 ## Install the library
 
 Next, install the [passwordless.dev JavaScript client library](js-client), either globally or as a module within your application. This library will allow your application to interact with the passwordless.dev API and with browsers' WebAuthn API. To install the library:
