@@ -68,7 +68,8 @@ import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min
 In all cases, your frontend must import the library to call the methods used by passwordless.dev:
 ```http
 <script>
-var p = new Passwordless.Client({});
+const Client = Passwordless.Client;
+var p = new Client({});
 </script>
 ```
 
@@ -118,7 +119,7 @@ Successful implementation will create a registration token returned that is retu
 
 
 // Instantiate a passwordless client using your API public key.
-var p = new Passwordless.Client({
+var p = new Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
@@ -144,7 +145,7 @@ Next, implement a workflow on your backend and frontend for signing in with a [p
 
 ```js
 // Instantiate a passwordless client using your API public key.
-var p = new Passwordless.Client({
+var p = new Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
