@@ -54,8 +54,20 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 
 |Test|Test|
 |----|----|
-|x|y|
-|z|q|
+|`descriptor`||
+|`publicKey`||
+|`userHandle`||
+|`signatureCounter`||
+|`credType`||
+|`createdAt`|Timestamp (UTC) when the credential was registered for the application.|
+|`aaGuid`||
+|`lastUsedAt`|Timestamp (UTC) when the credential was last used for authentication for the application.|
+|`rpid`|Relying party identifier for the application the credential is registered for.|
+|`origin`||
+|`country`||
+|`device`|Device information for the device on which the credential resides, for example `Chrome, Mac OS X 10`.|
+|`nickname`|A user-specified name associated with this specific credential.|
+|`userId`|The `userId` of the end-user associated with the credential.|
 
 
 ### Tokens

@@ -228,27 +228,29 @@ If successful, the `/list` endpoint will return an array of `.json` objects wher
 ```json
 [
     {
-        "aaGuid": "08987058-cadc-4b81-b6e1-30de50dcbe96",
-        "country": "",
-        "createdAt": "2021-08-01T01:29:49.7492687Z",
-        "credType": "none",
         "descriptor": {
-            "id": "qgB2ZetBhi0rIcaQK8_HrLQzXXfwKia46_PNjUC2L_w",
-            "type": "public-key"
+            "type": "public-key",
+            "id": "2mgrJ6LPItfxbnVc2UgFPHowNGKaYBm3Pf4so1bsXSk"
         },
-        "device": "Firefox, Windows 10",
-        "lastUsedAt": "2021-08-01T01:30:01.7528872Z",
-        "origin": "http://example.com:3000",
-        "publicKey": "pAEDAzkBACBZAQDK7vyAAihWxVR7lT0nlhfzVtcnlTUNRynJvUxbdu0C+R57G51MlSYhJhhv9UTx5qkyiz2nanvDX14cSqbAsCu7DjgXVVxLQT5C0QbrI8ZSdWv00Hkp5HGXpdmTTy5hHzTywaz4QwBJG92u5bwpVRkzH3C3JFI6uLt5QW5XdIG/bTqYozP8f+Gxh33ecyS9Vr4v56E3vl1+/E/dlTU8utCuoFBNjcQzocWX9XzPBMr5YfWuH2BBuiVo75US52GOIT6UQHth58Bq3ja2+E746dcCFJQoi1GN5xYru5jBQtGkBebgnmgz10QI5/a3I8MZSg7NFljccG+6nY++LY92OO6zIUMBAAE=",
-        "rpid": "example.com",
-        "signatureCounter": 1,
-        "userHandle": "ODIzMzI2OTk2",
-        "userId": "123",
-        "nickname": "Home laptop"
+        "publicKey": "pQECAyYgASFYIPi4M0A+ZFeyOHEC9iMe6dVhFnmOZdgac3MRmfqVpZ0AIlggWZ+l6+5rOGckXAsJ8i+mvPm4YuRQYDTHiJhIauagX4Q=",
+        "userHandle": "YzhhMzJlNWItNDZkMy00ODA4LWFlMTAtMTZkM2UyNmZmNmY5",
+        "signatureCounter": 0,
+        "credType": "none",
+        "createdAt": "2023-04-21T13:33:50.0764103",
+        "aaGuid": "adce0002-35bc-c60a-648b-0b25f1f05503",
+        "lastUsedAt": "2023-04-21T13:33:50.0764103",
+        "rpid": "adminconsole01.andersaberg.com",
+        "origin": "https://adminconsole01.andersaberg.com",
+        "country": "US",
+        "device": "Chrome, Mac OS X 10",
+        "nickname": "Fred's Macbook Pro 2",
+        "userId": "c8a32e5b-46d3-4808-ae10-16d3e26ff6f9" //
     },
     ...
 ]
 ```
+
+[Learn more about what these key-value pairs signify](concepts.html#credentials).
 
 ## /delete
 ### Request
