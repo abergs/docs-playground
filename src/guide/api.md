@@ -260,7 +260,7 @@ If successful, the `/list` endpoint will return an array of `.json` objects wher
 
 ```http
 POST /credentials/delete HTTP/1.1
-ApiSecret: demo:secret:yyy
+ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 Content-Type: application/json
 
 {
@@ -273,9 +273,17 @@ Content-Type: application/json
 If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#status-codes).
 
 ## /account/delete
+
 ### Request
 
-`POST` requests made to the `/account/delete` endpoint will delete your passwordless.dev account and all data stored in it. Data **will not be deleted immediately**, instead:
+`POST` requests made to the `/account/delete` endpoint will delete your passwordless.dev account and all data stored in it, including:
+
+- All stored credentials.
+- All stored aliases.
+- All stored settings.
+- All applications and their API keys.
+
+Data **will not be deleted immediately**, instead:
 
 1. Admin emails associated with the account will receive a warning email with a link to abort the deletion process.
 2. After 24 hours your API keys will be frozen.
@@ -290,11 +298,7 @@ ApiSecret: demo:secret:yyy
 
 ### Response
 
-If successful, the `/account/delete` endpoint will send a success response object, for example:
-
-```json
-
-```
+If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#status-codes).
 
 ## Status codes
 
