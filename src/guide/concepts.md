@@ -54,14 +54,14 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 |`descriptor`||
 |`publicKey`||
 |`userHandle`||
-|`signatureCounter`||
-|`credType`||
+|`signatureCounter`|The number of times this credential has been used for authentication.|
+|`credType`|The [attestation format](https://www.iana.org/assignments/webauthn/webauthn.xhtml) used by this credential, only relevant if the attestation type is not `none`.|
 |`createdAt`|Timestamp (UTC) when the credential was registered for the application.|
 |`aaGuid`||
 |`lastUsedAt`|Timestamp (UTC) when the credential was last used for authentication for the application.|
 |`rpid`|Relying party identifier for the application the credential is registered for.|
 |`origin`||
-|`country`||
+|`country`|Country code indicating where the |
 |`device`|Device information for the device on which the credential resides, for example `Chrome, Mac OS X 10`.|
 |`nickname`|A user-specified name associated with this specific credential.|
 |`userId`|The `userId` of the end-user associated with the credential.|
