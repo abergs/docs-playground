@@ -39,7 +39,9 @@ const payload = {
   "attType": "None", // WebAuthn attestation conveyance. Can be "none" (default), "direct", or "indirect".
   "authType": "platform", // WebAuthn authenticator attachment modality. Can be "platform" (default), which triggers client device-specific options Windows Hello, FaceID, or TouchID, or "cross-platform", which triggers roaming options like security keys.
   "userVerification": "preferred", // Whether the relying party requires locally-invoked authorization for the operation. Can be "preferred" (default), "required", or "optional".
-  "expiresAt": "3023-08-01T14:43:03Z" // Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.
+  "expiresAt": "3023-08-01T14:43:03Z", // Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.,
+  "aliases": ["pjfry@passwordless.dev"], // can be used to initiate a sign in.
+  "AliasHashing": true // if the alias should be hashed when stored, defaults to true
 };
 
 // POST the payload to the passwordless.dev API using your API private secret.
@@ -103,9 +105,8 @@ const token = { token: req.query.token };
 // POST the verification token to the passwordless.dev API using your API private secret.
 const response = await fetch(apiUrl + "/signin/verify", {
     method: "POST",
-    body: JSON.stringify(token),
+    body: JSON.stringify({token}),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json" }
-});
 });
 ```
 

@@ -179,7 +179,7 @@ const token = { token: req.query.token };
 const apiUrl = "https://v3.passwordless.dev";
 const response = await fetch(apiurl + "/signin/verify", {
     method: "POST",
-    body: JSON.stringify(token),
+    body: JSON.stringify({token}),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json" }
 });
 
