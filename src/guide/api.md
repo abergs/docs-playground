@@ -262,17 +262,13 @@ ApiSecret: demo:secret:yyy
 Content-Type: application/json
 
 {
-    "CredentialId":"qgB2ZetBhi0rIcaQK8_HrLQzXXfwKia46_PNjUC2L_w"
+    "credentialId":"qgB2ZetBhi0rIcaQK8_HrLQzXXfwKia46_PNjUC2L_w"
 }
 ```
 
 ### Response
 
-If successful, the `/delete` endpoint will send a success response object, for example:
-
-```JSON
-
-```
+If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#status-codes).
 
 ## /account/delete
 ### Request
