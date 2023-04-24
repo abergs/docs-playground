@@ -99,7 +99,7 @@ const payload = {
 
 // POST the payload to the passwordless.dev API using your API private secret.
 const apiUrl = "https://v3.passwordless.dev";
-var token = await fetch(apiUrl + "/register", {
+var token = await fetch(apiUrl + "/register/token", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
