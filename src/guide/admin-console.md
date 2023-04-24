@@ -16,25 +16,11 @@ The **Users** page allows you to monitor the end-users with FIDO2 WebAuthn passk
 
 ### Credentials
 
-Credentials registered to each user are listed, alongside the following data points:
-
-- Created:
-- Last used:
-- Credential Id:
-- Public Key:
-- Type:
-- Counter:
-- RPID:
-- Origin:
-- AsGuid:
+Credentials registered to each user are listed. [Learn what data is stored for each credential](concepts.html#credentials).
 
 ### Aliases
 
 Aliases registered to teach user are listed, however aliases that are hashed cannot be viewed here.
-
-### Audit Logs
-
-Audit logs track 
 
 ## Settings
 
