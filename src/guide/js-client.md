@@ -47,7 +47,7 @@ import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min
 In all cases, your frontend must import the library to call the methods in this document:
 ```http
 <script>
-var p = new Passwordless.Client({});
+const p = new Passwordless.Client({});
 </script>
 ```
 
@@ -62,12 +62,12 @@ Call the `.register()` method to fetch a [registration token](concepts.html#toke
 const apiUrl = "https://v3.passwordless.dev";
 
 // Instantiate a passwordless client using your API public key.
-var p = new Passwordless.Client({
+const p = new Passwordless.Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
 // Fetch the registration token from the backend.
-var myToken = await fetch(apiUrl + "/create-token?userId" + userId).then(r => r.text());
+const myToken = await fetch(apiUrl + "/create-token?userId" + userId).then(r => r.text());
 
 // Register the token with the end-user's device.
 try {
@@ -92,12 +92,12 @@ Call `.signin()` methods to generate a [verification token](concepts.html#tokens
 const apiUrl = "https://v3.passwordless.dev";
 
 // Instantiate a passwordless client using your API public key.
-var p = new Passwordless.Client({
+const p = new Passwordless.Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
 // Allow the user to specify a username or alias.
-var alias = "pjfry@passwordless.dev";
+const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
 try {
@@ -115,7 +115,7 @@ try {
 }
 
 // Call your backend to verify the generated token.
-var verifiedUser = await fetch(apiUrl + "/signin?token=" + token).then(r => r.json());
+const verifiedUser = await fetch(apiUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
   // If successful, proceed!
 }

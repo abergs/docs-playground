@@ -69,7 +69,7 @@ In all cases, your frontend must import the library to call the methods used by 
 ```http
 <script>
 const Client = Passwordless.Client;
-var p = new Client({});
+const p = new Client({});
 </script>
 ```
 
@@ -99,11 +99,14 @@ const payload = {
 
 // POST the payload to the passwordless.dev API using your API private secret.
 const apiUrl = "https://v3.passwordless.dev";
-var token = await fetch(apiUrl + "/register/token", {
+const token = await fetch(apiUrl + "/register/token", {
     method: "POST",
     body: JSON.stringify(payload),
-    headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
-});
+    headers: {
+        "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4",
+        "Content-Type": "application/json"
+    }
+}).then(r => r.text());
 ```
 
 Successful implementation will create a registration token returned that is returned as a string, for example:
@@ -119,13 +122,13 @@ Successful implementation will create a registration token returned that is retu
 
 
 // Instantiate a passwordless client using your API public key.
-var p = new Client({
+const p = new Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
 // Fetch the returned registration token from the backend.
 const backendUrl = "https://localhost:7002"; // Your backend
-var myToken = await fetch(backendUrl + "/create-user").then(r => r.text());
+const myToken = await fetch(backendUrl + "/create-user").then(r => r.text());
 
 // Register the token with the end-user's device.
 try {
@@ -145,19 +148,19 @@ Next, implement a workflow on your backend and frontend for signing in with a [p
 
 ```js
 // Instantiate a passwordless client using your API public key.
-var p = new Client({
+const p = new Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
 // Allow the user to specify a username or alias.
-var alias = "pjfry@passwordless.dev";
+const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
-var token = await p.signinWithAlias(alias);
+const token = await p.signinWithAlias(alias);
 
 // Call your backend to verify the generated token.
 const backendUrl = "https://localhost:7002"; // Your backend
-var verifiedUser = await fetch(backendUrl + "/signin?token=" + token).then(r => r.json());
+const verifiedUser = await fetch(backendUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
   // If successful, proceed!
 }
@@ -181,7 +184,7 @@ const response = await fetch(apiurl + "/signin/verify", {
 });
 
 // Cache the API response (see below) to a variable.
-var body = await response.json();
+const body = await response.json();
 
 // Check the API response for successful verification.
 if (body.success) {
