@@ -109,7 +109,7 @@ var token = await fetch(apiUrl + "/register/token", {
 Successful implementation will create a registration token returned that is returned as a string, for example:
 
 ```json
-"wWdDh02ItIvnCKT_02ItIvn..."
+"register_wWdDh02ItIvnCKT_02ItIvn..."
 ```
 
 <Badge text="frontend" type="tip"/>
