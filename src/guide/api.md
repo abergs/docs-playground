@@ -39,15 +39,17 @@ const payload = {
   "attType": "None", // WebAuthn attestation conveyance. Can be "none" (default), "direct", or "indirect".
   "authType": "platform", // WebAuthn authenticator attachment modality. Can be "platform" (default), which triggers client device-specific options Windows Hello, FaceID, or TouchID, or "cross-platform", which triggers roaming options like security keys.
   "userVerification": "preferred", // Whether the relying party requires locally-invoked authorization for the operation. Can be "preferred" (default), "required", or "optional".
-  "expiresAt": "3023-08-01T14:43:03Z" // Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.
+  "expiresAt": "3023-08-01T14:43:03Z", // Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.,
+  "aliases": ["pjfry@passwordless.dev"], // can be used to initiate a sign in.
+  "AliasHashing": true // if the alias should be hashed when stored, defaults to true
 };
 
 // POST the payload to the passwordless.dev API using your API private secret.
-var token = await fetch(apiUrl + "/register", {
+const token = await fetch(apiUrl + "/register", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
-});
+}).then(r => r.text());
 ```
 
 </template>
@@ -103,9 +105,8 @@ const token = { token: req.query.token };
 // POST the verification token to the passwordless.dev API using your API private secret.
 const response = await fetch(apiUrl + "/signin/verify", {
     method: "POST",
-    body: JSON.stringify(token),
+    body: JSON.stringify({token}),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json" }
-});
 });
 ```
 
@@ -166,7 +167,7 @@ const payload = {
 };
 
 // POST the array to the passwordless.dev API using your API private secret.
-var token = await fetch(apiUrl + "/alias", {
+const  token = await fetch(apiUrl + "/alias", {
     "method": "POST",
     "body": JSON.stringify(payload),
     "headers": { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
@@ -212,11 +213,11 @@ const payload = {
 };
 
 // POST the userId to the passwordless.dev API using your API private secret
-var credentials = await fetch(apiUrl + "/credentials/list", {
+const credentials = await fetch(apiUrl + "/credentials/list", {
     "method": "POST",
     "body": JSON.stringify(payload),
     "headers": { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
-});
+}).then(r => r.json());
 ```
 </template>
 </CodeSwitcher>
@@ -263,17 +264,13 @@ ApiSecret: demo:secret:yyy
 Content-Type: application/json
 
 {
-    "CredentialId":"qgB2ZetBhi0rIcaQK8_HrLQzXXfwKia46_PNjUC2L_w"
+    "credentialId":"qgB2ZetBhi0rIcaQK8_HrLQzXXfwKia46_PNjUC2L_w"
 }
 ```
 
 ### Response
 
-If successful, the `/delete` endpoint will send a success response object, for example:
-
-```JSON
-
-```
+If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#status-codes).
 
 ## /account/delete
 ### Request
