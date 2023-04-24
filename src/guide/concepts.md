@@ -14,12 +14,9 @@ In order to acheive FIDO2 compliance, the passwordless.dev authentication proces
 
 The FIDO2 specification defines several user identifiers which are or can be used by passwordless.dev in various registration and sign-in operations:
 
-- A **UserId** is
-
-
-is a unique string that represents the [WebAuthn Userhandle](https://www.w3.org/TR/webauthn-2/#dom-publickeycredentialuserentity-id). The userid is not meant to be displayed to a user and does not contain personally identifieable information (such as email, name). Authentication attempts are made with the userid and not individual names or display names.
-- A **username** is
-- A **display name** is
+- A **UserId** is a unique string that represents the [WebAuthn Userhandle](https://www.w3.org/TR/webauthn-2/#dom-publickeycredentialuserentity-id). This value is not meant to be displayed to a user and should not contain personally identifiable information. Authentication attempts are made exclusively against `userId` values, however values like `username` and `alias` can be used to lookup a `userId`.
+- A **username** is a user-specified identifier, for example an email address or phone number, that should be used to lookup the `userId` of a [credential](#credentials).
+- A **display name** is a human-palatable name for the account, which should be chosen by the user and only used in your application's UI.
 - An **alias** is a user-facing reference to a `userId` which allows sign-in with additional usernames, email addresses, etc. By default, aliases are hashed before being stored to preserve user privacy. Multiple aliases can be set for a `userId` by making requests to the `/alias` endpoint ([learn more](api.html#alias)), however the following rules should be taken into consideration when allowing users to create aliases:
   - An alias must be unique to the specified `userId`.
   - An alias must be no more than 250 characters.
