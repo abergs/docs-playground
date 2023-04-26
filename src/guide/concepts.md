@@ -51,17 +51,17 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 
 |Test|Test|
 |----|----|
-|`descriptor`||
-|`publicKey`||
-|`userHandle`||
+|`descriptor`|A string of text that identifies the application or service using the credential.|
+|`publicKey`|The shareable, cryptographic key that is used to send data to the API.|
+|`userHandle`|The unique identifier that is associated with a specific user account. It can be used to retreive information about the user.|
 |`signatureCounter`|The number of times this credential has been used for authentication.|
 |`credType`|The [attestation format](https://www.iana.org/assignments/webauthn/webauthn.xhtml) used by this credential, only relevant if the attestation type is not `none`.|
 |`createdAt`|Timestamp (UTC) when the credential was registered for the application.|
-|`aaGuid`||
+|`aaGuid`|The Authenticator Attestation GUID is a unique identifier that is used to identify your authenticator when it is registered.|
 |`lastUsedAt`|Timestamp (UTC) when the credential was last used for authentication for the application.|
 |`rpid`|Relying party identifier for the application the credential is registered for.|
-|`origin`||
-|`country`|Country code indicating where the |
+|`origin`|The domain name or IP address of the service using the API.|
+|`country`|Country code indicating where the credential is located or registered.|
 |`device`|Device information for the device on which the credential resides, for example `Chrome, Mac OS X 10`.|
 |`nickname`|A user-specified name associated with this specific credential.|
 |`userId`|The `userId` of the end-user associated with the credential.|
