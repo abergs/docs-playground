@@ -1,5 +1,5 @@
 # Plans & Pricing
-Passwordless.dev offers different plans to meet your security needs. Free and paid plans are available to add security your projects, products, or product teams.
+Passwordless.dev offers different plans to meet your security needs. Free and paid plans are available to passwordless authentication to your projects, products, or product teams.
 
 #### All Passwordless.dev plans will offer:
 * FIDO2 specifications for authentication.
@@ -17,7 +17,7 @@ Passwordless.dev offers different plans to meet your security needs. Free and pa
 
 ## Passwordless plans
 
-| |Consumer free|Consumer business| Team members|
+|Features|Consumer free|Consumer business| Team members|
 |----|----|----|----|
 |User seats|Free up to 10,000|$0.05 per Seat for first 10,000 <br /> $0.01 per seat after 10,000|[Contact us](https://bitwarden.com/contact/) for seat pricing|
 |Admins|1 Console Admin|Unlimited Console Admins|Unlimited Console Admins|
@@ -25,24 +25,27 @@ Passwordless.dev offers different plans to meet your security needs. Free and pa
 |Service level agreement|1 SLA|No SLA|No SLA|
 
 
-## Select the plan that is right for you organization
+## Select the plan that is right for your organization
 
 <!-- ![Developer plan](./developer-pricing.png) -->
-The developer plan is the free teir of Passwordless.dev. With this plan we aim to support community projects and spread the adoption of passwordless technologies.
+#### Developer plan
+The free teir of Passwordless.dev. With this plan we aim to support community projects and spread the adoption of passwordless technologies.
 
 Where to use the features of Developer plan:
 * Sign up
 * Sign in
 
 <!-- ![Pro plan](./pro-pricing.png) -->
-The pro plan brings Passwordless and FIDO2 to and brings it to your large scale application
+#### Pro plan 
+Bring Passwordless and FIDO2 to your large scale application.
 
 Where to use the features of Pro plan:
 * Sign up
 * Sign in
 
-[Teams plan]
-Bring passwordless to your internal applications and team members. Secure your businnes technology today! Introducing WebAuthn to team members can seamlessly increase the security of your organization.
+#### Teams plan
+Bring passwordless to your internal applications and team members. Modernize existing enterprise applications and enable secure passkey access for your teams.
+
 * For more information on seat availabliity and pricing for Team plans, [Contact us](https://bitwarden.com/contact/).
 
 Where to use features of a Team Plan:
