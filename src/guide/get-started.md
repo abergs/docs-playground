@@ -78,7 +78,11 @@ const p = new Client({});
 
 ## Build a registration flow
 
-Next, implement a workflow on your backend and frontend for registering a [passkey](concepts.html#credentials). Code that you write to do this must:
+Next, implement a workflow on your backend and frontend for registering a [passkey](concepts.html#credentials). At a high-level, here's what you'll be doing:
+
+![Register credential workflow](./register-diagram.png)
+
+Code that you write to do this must:
 
 <Badge text="backend" type="warning"/>
 1. Generate a [registration token](concepts.html#tokens) by calling the passwordless.dev API's `/register/token` endpoint ([learn more](api/#register-token)) with, at a minimum, a `userId`, `username`, and `displayname` for the user, for example:
@@ -141,7 +145,11 @@ Successful implementation will prompt passwordless.dev to negotiate creation of 
 
 ## Build a signin flow
 
-Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#credentials). Code that you write must:
+Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#credentials). At a high-level, here's what you'll be doing:
+
+![Signin workflow flow](./signin-diagram.png)
+
+Code that you write must:
 
 <Badge text="frontend" type="tip"/>
 1. Generate, client-side, a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. Include the user's `userId` or alias ([learn more](js-client.html#signin)), for example:
