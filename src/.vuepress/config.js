@@ -39,22 +39,22 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Passwordless Guide',
+        text: 'Documentation',
         link: '/guide/',
       },
       {
-        text: 'fido2-net-lib',
-        link: '/fido2-net-lib/'
+        text: 'Sign Up',
+        link: 'https://adminconsole01.andersaberg.com/'
       },
       {
-        text: 'Passwordless homepage',
+        text: 'Home',
         link: 'https://beta.passwordless.dev'
       }
     ],
     sidebar: {
       '/guide/': [
         {
-          title: 'Passwordless Documentation',
+          title: 'Home',
           collapsable: false,
           children: [
             'releasenotes',

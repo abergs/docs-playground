@@ -1,69 +1,39 @@
 # Plans & Pricing
-Passwordless.dev offers different plans to meet your security needs. Free and paid plans are available to passwordless authentication to your projects, products, or product teams.
+Passwordless.dev offers different plans to meet your needs. Free and paid plans are available for passwordless authentication to your projects, products, or product teams. **All Passwordless.dev plans offer:**
 
-#### All Passwordless.dev plans will offer:
-* FIDO2 specifications for authentication.
-* WebAuthn standards for secure authentication.
-* CTAP2 communication between systems and external authenticators.
-* Use of open source fido2-net-lib.
-* Support for several frameworks including: Node.js, ASP.NET, PHP, and Python.
-* Fully featured passwordless API for use with any language.
-* Admin console access for creating, configuring, monitoring, and managing your app.
-* Github access for support and SDKs.
-* Support with major browsers.
-
+- A full software toolkit for integrating FIDO2 WebAuthn passkey functionality into your web applications, including a client JavaScript Library and full-featured API.
+- An admin console for for creating and configuring applications, monitoring application usage, and managing billing.
+- 24/7 customer support and documentation services.
 
 <!-- ![get started](./CleanShot%202023-04-12%20at%2020.54.05%402x.png) -->
 
-## Passwordless plans
+## Passkeys for your users
 
-|Features|Consumer free|Consumer business| Team members|
-|----|----|----|----|
-|User seats|Free up to 10,000|$0.05 per Seat for first 10,000 <br /> $0.01 per seat after 10,000|[Contact us](https://bitwarden.com/contact/) for seat pricing|
-|Admins|1 Console Admin|Unlimited Console Admins|Unlimited Console Admins|
-|App allounance|1 App per organization|Unlimited apps per organization|Unlimited apps per organization|
-|Service level agreement|1 SLA|No SLA|No SLA|
+These plans are intended for use by businesses and individuals running web applications for public use. Passkeys for your users plans give you all the tools you need to enable your end-users to authenticate with FIDO2 WebAuthn credentials.
 
+|Features|Free|Pro|
+|--------|----|---|
+|Users|10,000|$0.05/user up to 10,000 users<br><br>$0.01/user for 10,001+ users|
+|Applications|1|Unlimited|
+|Console Admins|1|Unlimited|
+|SLA|-|See [here]()|
 
-## Select the plan that is right for your organization
+The following table is a quick reference for the pricing structure under the **Pro** plan:
 
-<!-- ![Developer plan](./developer-pricing.png) -->
-#### Developer plan
-The free teir of Passwordless.dev. With this plan we aim to support community projects and spread the adoption of passwordless technologies.
-
-Where to use the features of Developer plan:
-* Sign up
-* Sign in
-
-<!-- ![Pro plan](./pro-pricing.png) -->
-#### Pro plan 
-Bring Passwordless and FIDO2 to your large scale application.
-
-Where to use the features of Pro plan:
-* Sign up
-* Sign in
-
-#### Teams plan
-Bring passwordless to your internal applications and team members. Modernize existing enterprise applications and enable secure passkey access for your teams.
-
-* For more information on seat availabliity and pricing for Team plans, [Contact us](https://bitwarden.com/contact/).
-
-Where to use features of a Team Plan:
-* Audit Logs
-* Onboard SCIM
-* FIDO2 Attestat ion
-* User roles
-
-### Pricing structure quick reference
-Below is a quick reference for the approachable pricing structure that Passwordless.dev offers for customers.
-|Seats|Cost|
-|----|----|
-|5,000 Users| $250|
+|Registered Users|Cost to You|
+|----------------|-----------|
+|5,000 Users|$250|
 |10,000 Users|$500|
 |20,000 Users|$600|
 |50,000 Users|$900|
 |100,000 Users|$1400|
 
+## Passkeys for your workforce
+
+This plan is intended for use by businesses modernizing internal web applications to enable passkeys access for their teams.
+
+To learn more about implementing passkeys for your workforce, [contact Bitwarden]().
+
 ## Were you a Paswordless.dev beta user?
 
-Once the Passwordless.dev beta program has ended, users will be transitioned into a passwordless.dev plan. Free plans will still be available once Passwordless.dev has entered GA. Prior to the GA release, all beta users will be notified and have the option to opt-in to a paid plan.
+Prior to the GA release, all beta customers will be notified and have the option to opt-in to a paid plan. Otherwise, once the passwordless.dev beta program has ended, customers will be transitioned to the **Free** plan. 
