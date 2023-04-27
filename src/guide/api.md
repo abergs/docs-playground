@@ -293,7 +293,7 @@ Requests must only include your API private secret, for example:
 
 ```http
 POST /account/delete HTTP/1.1
-ApiSecret: demo:secret:yyy
+ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 ```
 
 ### Response
