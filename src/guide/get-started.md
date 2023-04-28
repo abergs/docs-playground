@@ -14,7 +14,8 @@ Sign up for a passwordless.dev account [here](https://adminconsole-devtest.azure
 
 When you sign up you'll land on the [Admin Console](admin-console), your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
 
-<img :src="$withBase('/admin-console.png')" alt="Admin Console">
+![Admin console](./admin-console.png)
+
 
 ## Create an application
 
