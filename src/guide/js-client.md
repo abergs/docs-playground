@@ -135,7 +135,7 @@ if (Passwordless.isBrowserSupported() === true) {
 ## .isPlatformSupported()
 
 
-Call the static async `.isPlatformSupported()` method to check if the end-users device or browser supports platform authentication like Windows Hello, for example:
+Call the static async `.isPlatformSupported()` method to check if the end-users device or browser supports platform authentication such as Windows Hello, for example:
 
 ```js
 if (await Passwordless.isPlatformSupported() === true) {
