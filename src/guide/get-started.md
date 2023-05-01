@@ -85,9 +85,9 @@ Next, implement a workflow on your backend and frontend for registering a [passk
 
 Code that you write to do this must:
 
-<Badge text="backend" type="warning"/>
 1. Generate a [registration token](concepts.html#tokens) by calling the passwordless.dev API's `/register/token` endpoint ([learn more](api/#register-token)) with, at a minimum, a `userId`, `username`, and `displayname` for the user, for example:
 
+<Badge text="backend" type="warning"/>
 ```js
 
 // Code written for this step should run on your backend.
@@ -120,9 +120,9 @@ Successful implementation will create a registration token returned that is retu
 "register_wWdDh02ItIvnCKT_02ItIvn..."
 ```
 
-<Badge text="frontend" type="tip"/>
 2. Initiate, client-side, the WebAuthn process to create and store a WebAuthn credential using the generated registration token ([learn more](js-client)), for example:
 
+<Badge text="frontend" type="tip"/>
 ```js
 // Code written for this step should run on your frontend.
 
@@ -152,9 +152,9 @@ Next, implement a workflow on your backend and frontend for signing in with a [p
 
 Code that you write must:
 
-<Badge text="frontend" type="tip"/>
 1. Generate, client-side, a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. Include the user's `userId` or alias ([learn more](js-client.html#signin)), for example:
 
+<Badge text="frontend" type="tip"/>
 ```js
 // Code written for this step should run on your frontend.
 
@@ -179,9 +179,9 @@ if(verifiedUser.success === true) {
 
 Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (**step 2**) before proceeding to act on the confirmed sign-in
 
-<Badge text="backend" type="warning"/>
 2. Validate the verification token by calling the passwordless.dev API's `/signin/verify` endpoint ([learn more](api/#signin-verify)) with generated token, for example:
 
+<Badge text="backend" type="warning"/>
 ```js
 // Code written for this step should run on your backend.
 
