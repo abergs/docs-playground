@@ -7,18 +7,22 @@ Passwordless.dev offers different plans to meet your needs. Free and paid plans 
 
 <!-- ![get started](./CleanShot%202023-04-12%20at%2020.54.05%402x.png) -->
 
-## Passkeys for your users
+## Free organizations
 
-These plans are intended for use by businesses and individuals running web applications for public use. Passkeys for your users plans give you all the tools you need to enable your end-users to authenticate with FIDO2 WebAuthn credentials.
+Passwordless.dev offers free organizations, which will allow you to create a **single application** that can be managed by a **single administrator**. Free plan applications can manage FIDO2 WebAuthn credentials for **up to 10,000 users**.
 
-|Features|Free|Pro|
-|--------|----|---|
-|Users|10,000|$0.05/user up to 10,000 users<br><br>$0.01/user for 10,001+ users|
-|Applications|1|Unlimited|
-|Console Admins|1|Unlimited|
-|SLA|-|See [here]()|
+## Paid organizations
 
-The following table is a quick reference for the pricing structure under the **Pro** plan:
+Passwordless.dev offers paid organizations, which allow you to create an **unlimited number of applications** that can be managed by an **unlimited number of administrators**. Applications created by paid organizations are further sub-divided into two types:
+
+### Users Pro applications
+
+Users Pro applications are intended for use by businesses and individuals running web applications for public use, giving you all the tools you need to enable your end-users to authenticate with FIDO2 WebAuthn credentials. Users Pro applications are billing at the following rate:
+
+- $0.05/user up to 10,000 users
+- $0.01/user for 10,001+ users
+
+The following table is a quick reference for the pricing structure under this plan:
 
 |Registered Users|Cost to You|
 |----------------|-----------|
@@ -28,12 +32,12 @@ The following table is a quick reference for the pricing structure under the **P
 |50,000 Users|$900|
 |100,000 Users|$1400|
 
-## Passkeys for your workforce
+### Team Members applications
 
-This plan is intended for use by businesses modernizing internal web applications to enable passkeys access for their teams.
+Team Members applications are intended for use by businesses modernizing internal web applications to enable passkeys access for their teams.
 
-To learn more about implementing passkeys for your workforce, [contact Bitwarden]().
+Please [contact us](https://bitwarden.com/contact-sales) to learn more about Team Members applications.
 
 ## Were you a Paswordless.dev beta user?
 
-Prior to the GA release, all beta customers will be notified and have the option to opt-in to a paid plan. Otherwise, once the passwordless.dev beta program has ended, customers will be transitioned to the **Free** plan. 
+Prior to the GA release, all beta customers will be notified and have the option to opt-in to a paid plan. Otherwise, once the passwordless.dev beta program has ended, customers will be transitioned to the **Free** plan.
