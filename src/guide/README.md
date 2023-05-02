@@ -6,12 +6,12 @@ Passwordless.dev wraps FIDO2 WebAuthn passkey functionality in an easy-to-use to
 
 ![Passwordless.dev operation flow](./diagram.png)
 
-Architecturally, passwordless.dev consists of three key parts:
+The passwordless.dev architecture consists of three key parts:
 
 - An [open-source client side library](js-client), used by your frontend to make requests to end-users browsers' WebAuthn API and requests to the passwordless.dev APIs.
 - A public RESTful API, used by the client-side library to complete FIDO2 WebAuthn cryptographic exchanges with the browser.
 - A [private RESTful API](api), used by your backend to initiate key registrations, verify signins, and retrieve keys for end-users.
 
 ::: tip
-For more information on the guts of passwordless.dev check out [Concepts](concepts), otherwise we recommend heading straight to [Get Started](get-started).
+For more information on the principles that support passwordless.dev, check out [Concepts](concepts). If you are ready to start using passwordless.dev, visit [Get Started](get-started) for step-by-step instructions.
 :::
