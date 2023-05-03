@@ -15,7 +15,7 @@ Passwordless.dev offers free organizations, which will allow you to create a **s
 
 Passwordless.dev offers paid organizations, which allow you to create an **unlimited number of applications** that can be managed by an **unlimited number of administrators**. Applications created by paid organizations are further sub-divided into two types:
 
-### Users Pro applications
+### Pro applications
 
 Users Pro applications are intended for use by businesses and individuals running web applications for public use, giving you all the tools you need to enable your end-users to authenticate with FIDO2 WebAuthn credentials. Users Pro applications are billing at the following rate:
 
@@ -32,7 +32,7 @@ The following table is a quick reference for the pricing structure under this pl
 |50,000 Users|$900|
 |100,000 Users|$1400|
 
-### Team Members applications
+### Enterprise applications
 
 Team Members applications are intended for use by businesses modernizing internal web applications to enable passkeys access for their teams.
 
