@@ -1,6 +1,6 @@
 # Get Started
 
-Passwordless.dev is a software toolkit that helps web developers to support [FIDO2 WebAuthn passkeys](concepts) for authentication by their end-users. In this guide, we'll chart the quickest path to implementing passwordless.dev for your website.
+Passwordless.dev is a software toolkit that empowers web developers to build applications that easily authenticate end-users using [FIDO2 WebAuthn passkeys](concepts). In this guide, we'll chart the quickest path to implementing passwordless.dev for your website.
 
 ::: tip
 This guide will skip over some conceptual basics in order to get you started as quickly as possible. Check out [Concepts](concepts) for in-depth discussion of the ideas used by passwordless.dev.
