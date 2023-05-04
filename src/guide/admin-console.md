@@ -12,7 +12,7 @@ The number of applications you can create depends on your [plan](plans). Select 
 
 ### Get started
 
-The **Get Started** page walks you through the preliminary steps for getting passwordless.dev running in your application. This information is very similar to what's documented in the [Get Started](get-started) guide.
+The **Get Started** page walks you through the preliminary steps for getting Passwordless.dev running in your application. This information is very similar to what's documented in the [Get Started](get-started) guide.
 
 :::warning
 This page contains your [API keys](concepts.html#api-keys). It's important to download your API keys to a safe place, as they will be removed from the admin console after 7 days.
@@ -36,7 +36,7 @@ The **Settings** page will offer some options for configuring your application. 
 
 ### Playground
 
-The **Playground** page gives access to a simple passwordless demo you can use for testing devices.
+The **Playground** page gives access to a simple Passwordless demo you can use for testing devices.
 
 ## Billing
 
@@ -44,14 +44,14 @@ The **Billing** page
 
 ## Admins
 
-The **Admins** page allows you to invite other administrators to your passwordless.dev organization to manage applications, billing, and more. All admins, including whomever created the passwordless.dev account and any applications, have **equal permissions within the organization**.
+The **Admins** page allows you to invite other administrators to your Passwordless.dev organization to manage applications, billing, and more. All admins, including whomever created the Passwordless.dev account and any applications, have **equal permissions within the organization**.
 
 ![Admin page](./admin-page.png)
 
 To invite an admin:
 
 1. Enter an email address in the **Invitees** text input and select **Send Invite**.
-2. Your future-admin will receive an invite email. Instruct them to use this invite to complete registration for passwordless.dev and, subsequently, to follow the email verification step.
+2. Your future-admin will receive an invite email. Instruct them to use this invite to complete registration for Passwordless.dev and, subsequently, to follow the email verification step.
 
 Admins can be deleted from this same page.
 
