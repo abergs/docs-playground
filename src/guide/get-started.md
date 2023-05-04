@@ -104,14 +104,14 @@ const payload = {
 
 // POST the payload to the passwordless.dev API using your API private secret.
 const apiUrl = "https://v3.passwordless.dev";
-const token = await fetch(apiUrl + "/register/token", {
+const {token} = await fetch(apiUrl + "/register/token", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
         "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4",
         "Content-Type": "application/json"
     }
-}).then(r => r.text());
+}).then(r => r.json());
 ```
 
 Successful implementation will create a registration token returned that is returned as a string, for example:
@@ -167,7 +167,7 @@ const p = new Client({
 const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
-const token = await p.signinWithAlias(alias);
+const {token, error} = await p.signinWithAlias(alias);
 
 // Call your backend to verify the generated token.
 const backendUrl = "https://localhost:7002"; // Your backend

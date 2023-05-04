@@ -45,8 +45,8 @@ const apiKey = "demobackend:public:c203e65b581443778ea4823b3ef0d6af";
 
  async function Register(alias) {
    const p = new Passwordless.Client({ apiKey });
-   const myToken = await fetch(backendUrl + "/create-token?alias=" + alias).then((r) => r.text());
-   await p.register(myToken);
+   const registerToken = await fetch(backendUrl + "/create-token?alias=" + alias).then((r) => r.text());
+   await p.register(registerToken);
    console.log("Register succeeded");
  }
 ```
