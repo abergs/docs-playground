@@ -39,7 +39,7 @@ This Node.js implementation is done in only a few lines of code. A [register](ap
 
 ```js
 const apiKey = "demobackend:public:c203e65b581443778ea4823b3ef0d6af";
-const backendUrl = "https://demo-backend.passwordless.dev";
+const backendUrl = "https://localhots:8002";
 
 async function registerPasskey(alias) {
     const p = new Passwordless.Client({ apiKey });
