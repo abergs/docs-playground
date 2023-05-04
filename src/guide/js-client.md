@@ -59,21 +59,17 @@ const p = new Passwordless.Client({});
 Call the `.register()` method to fetch a [registration token](concepts.html#tokens) from your backend to authorize creation of a WebAuthn credential on the end-user's device, for example:
 
 ```js
-const apiUrl = "https://v3.passwordless.dev";
-
 // Instantiate a passwordless client using your API public key.
 const p = new Passwordless.Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
 // Fetch the registration token from the backend.
-const myToken = await fetch(apiUrl + "/create-token?userId" + userId).then(r => r.text());
+const backendUrl = "https://localhost:8002";
+const registerToken = await fetch(backendUrl + "/create-token?userId" + userId).then(r => r.text());
 
 // Register the token with the end-user's device.
-try {
-    await p.register(myToken);
-} catch (e) {
-}
+const { token, error } = await p.register(registerToken);
 ```
 
 Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
@@ -84,13 +80,12 @@ Call `.signin()` methods to generate a [verification token](concepts.html#tokens
 
 |Method|Description|Example|
 |------|-----------|-------|
-|`.signinWithAutofill`||`verify_token = await p.signinWithAutofill();`|
-|`.signinWithAlias`||`verify_token = await p.signinWithAlias(email);`|
-|`.signInWithId`||`verify_token = await p.signInWithId(userId);`|
+|`.signinWithAutofill()`|Triggers the Browser native autofill UI to select identity and sign in|`verify_token = await p.signinWithAutofill();`|
+|`.signinWithDiscoverable()`|Triggers the Browsers native UI prompt to select identity and sign in |`verify_token = await p.signinWithDiscoverable();`|
+|`.signinWithAlias(alias)`|Uses a [alias](api.html#alias) (e.g. email,username) to specify the user|`verify_token = await p.signinWithAlias(email);`|
+|`.signinWithId(id)`|Uses the UserId to specify the user|`verify_token = await p.signinWithId(userId);`|
 
 ```js
-const apiUrl = "https://v3.passwordless.dev";
-
 // Instantiate a passwordless client using your API public key.
 const p = new Passwordless.Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
@@ -100,22 +95,25 @@ const p = new Passwordless.Client({
 const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
-try {
-    let verify_token = null;
-    // Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn".
-    verify_token = await p.signinWithAutofill();
-    // Option 2: Use an alias specified by the user.
+try {    
+    // Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn". (only works with discoverable passkeys)
+    const { token, error } = await p.signinWithAutofill();
+    
+    // Option 2: Enables browsers to suggest passkeys by opening a UI prompt (only works with discoverable passkeys)
+    const { token, error } =  await p.signinWithDiscoverable();
+    
+    // Option 3: Use an alias specified by the user.
     const email = "pjfry@passwordless.dev";
-    verify_token = await p.signinWithAlias(email);
-    // Option 3: Do not specify an alias to allow the user to select any available credentials on the device or insert a security key.
-    verify_token = await p.signinWithAlias(null);
+    const { token, error } = await p.signinWithAlias(email);
+    
     // Option 4: Use a userId if already known, for example if the user is re-authenticating.
     const userId = "107fb578-9559-4540-a0e2-f82ad78852f7";
-    verify_token = await p.signInWithId(userId);
+    const { token, error } = await p.signinWithId(userId);
 }
 
 // Call your backend to verify the generated token.
-const verifiedUser = await fetch(apiUrl + "/signin?token=" + token).then(r => r.json());
+const backendUrl = "https://localhost:8002"; // Your backend
+const verifiedUser = await fetch(backendUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
   // If successful, proceed!
 }

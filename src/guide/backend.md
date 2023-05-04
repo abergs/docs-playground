@@ -20,24 +20,15 @@ public async Task<ActionResult<string>> GetRegisterToken(string alias)
             });
 
             var request = await _httpClient.PostAsync("register/token", new StringContent(json, Encoding.UTF8, "application/json"));
-            request.EnsureSuccessStatusCode();
-            var token = await request.Content.ReadAsStringAsync();
-
-            try
-            {
-                var aliasJson = JsonSerializer.Serialize(new
-                {
-                    userId = userId,
-                    aliases = new string[] { alias }
-                });
-                var aliasRequest = await _httpClient.PostAsync("alias", new StringContent(aliasJson, Encoding.UTF8, "application/json"));
-                aliasRequest.EnsureSuccessStatusCode();
+            
+            var json = await request.Content.ReadAsStringAsync();
+            if (res.IsSuccessStatusCode) {   
+                return json; // { "token": "register_xxyyzz..."}    
+            } else {
+                // log the error
+                throw new Exception(json);
+                // { errorCode: "unknown_credentials", "title": "This is what wrong", "details": "..."}
             }
-            catch(Exception) {
-                throw;
-            }
-
-            return token;
         }
 ```
 

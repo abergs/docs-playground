@@ -45,11 +45,11 @@ const payload = {
 };
 
 // POST the payload to the passwordless.dev API using your API private secret.
-const token = await fetch(apiUrl + "/register", {
+const { token } = await fetch(apiUrl + "/register", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
-}).then(r => r.text());
+}).then(r => r.json());
 ```
 
 </template>
@@ -167,7 +167,7 @@ const payload = {
 };
 
 // POST the array to the passwordless.dev API using your API private secret.
-const  token = await fetch(apiUrl + "/alias", {
+await fetch(apiUrl + "/alias", {
     "method": "POST",
     "body": JSON.stringify(payload),
     "headers": { "ApiSecret": "myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4", "Content-Type": "application/json"}
