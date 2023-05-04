@@ -31,7 +31,7 @@ if(error) {
 
 ## List of Error codes
 
-### 400 missing_register_token
+### missing_register_token
 
 You receive this error when you call `p.register(registerToken)` - but the value of `registerToken` is not valid.
 
@@ -41,4 +41,4 @@ Make sure you have a expected value in your `registerToken`. Hint: It should sta
 
 You obtain a register token from your backend by calling the `/register/token` endpoint.
 
-### 400 unknown_credentials
+### unknown_credentials
