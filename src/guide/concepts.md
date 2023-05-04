@@ -22,6 +22,12 @@ The FIDO2 specification defines several user identifiers which are or can be use
   - An alias must be no more than 250 characters.
   - A `userId` may have no more than 10 aliases associated with it.
 
+### Authenticator types
+FIDO2 authenticators can be one of two types:
+
+* **Platform authenticators** are device-resident authenticators, like macOS FaceID or TouchID, or Windows Hello, which cannot be accessed via protocols like USB or NFC.
+* **Roaming authenticators** (also called "cross-platform") are detachable device-agnostic authenticators, like USB security keys, that can connect to multiple devices over a supported transport protocol like USB or NFC.
+
 ## Passwordless.dev
 
 ### Product components
@@ -83,11 +89,6 @@ The ID for relying parties provides the technology platform and identification t
 
 ### User verification
 A FIDO2 server RP can interact with an authenticator to verify a user. This can be done via PIN code, biometrics, or other 2FA methods that securely verify that the proper person is accessing an account.
-
-### Platform vs. cross-platform
-An authenticator can have two classifications:
-* A **platform authenticator** is built-in or part of the client platform (such as Faceid, TouchID, Windows Hello,).
-* A **roaming authenticator** ("cross-platform") is detachable (security key).
 
 <!--
 
