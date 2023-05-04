@@ -65,8 +65,7 @@ module.exports = {
             'js-client',
             'frontend',
             'admin-console',
-            'concepts',
-            'plans'
+            'concepts'
           ]
         }
       ],
