@@ -7,29 +7,27 @@ You can use passwordless.dev with any programming language by implementing calls
 This ASP.NET Core implementation uses .NET5 and some JavaScript for a simple passwordless.dev implementation. A [register](api/#register-token) function might look something like:
 
 ```csharp
-public async Task<ActionResult<string>> GetRegisterToken(string alias)
-        {
+public async Task<ActionResult<string>> GetRegisterToken(string alias) {
+    string userId = Guid.NewGuid().ToString();
 
-            string userId = Guid.NewGuid().ToString();
+    var json = JsonSerializer.Serialize(new
+    {
+        userId = userId,
+        username = alias,
+        DisplayName = "Mr Guest"
+    });
 
-            var json = JsonSerializer.Serialize(new
-            {
-                userId = userId,
-                username = alias,
-                DisplayName = "Mr Guest"
-            });
-
-            var request = await _httpClient.PostAsync("register/token", new StringContent(json, Encoding.UTF8, "application/json"));
-            
-            var json = await request.Content.ReadAsStringAsync();
-            if (res.IsSuccessStatusCode) {   
-                return json; // { "token": "register_xxyyzz..."}    
-            } else {
-                // log the error
-                throw new Exception(json);
-                // { errorCode: "unknown_credentials", "title": "This is what wrong", "details": "..."}
-            }
-        }
+    var request = await _httpClient.PostAsync("register/token", new StringContent(json, Encoding.UTF8, "application/json"));
+    
+    var json = await request.Content.ReadAsStringAsync();
+    if (res.IsSuccessStatusCode) {   
+        return json; // { "token": "register_xxyyzz..."}    
+    } else {
+        // log the error
+        throw new Exception(json);
+        // { errorCode: "unknown_credentials", "title": "This is what wrong", "details": "..."}
+    }
+}
 ```
 
 
