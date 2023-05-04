@@ -43,7 +43,7 @@ const backendUrl = "https://localhots:8002";
 
 async function registerPasskey(alias) {
     const p = new Passwordless.Client({ apiKey });
-    const registerToken = await fetch(backendUrl + "/create-token?alias=" + alias).then((r) => r.text());
+    const registerToken = await fetch(backendUrl + "/create-token?alias=" + alias).then((r) => r.json());
     const { token, error} = await p.register(registerToken);
     if(token) {
         console.log("Succesfully registered as passkey!");
