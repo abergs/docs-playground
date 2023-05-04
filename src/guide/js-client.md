@@ -8,7 +8,7 @@ All methods **require** your API [public key](concepts.html#api-keys) for authen
 
 To install the passwordless.dev JavaScript client:
 
-<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',http:'http'}">
+<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',script:'Script tag'}">
 <template v-slot:bash1>
 
 ```bash
@@ -17,6 +17,7 @@ yarn add @passwordlessdev/passwordless-client
 In all cases, your frontend must import the library to call the methods in this document:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
+const p = new Client({ apiKey: "" })
 ```
 </template>
 <template v-slot:bash2>
@@ -27,6 +28,7 @@ npm install @passwordlessdev/passwordless-client
 In all cases, your frontend must import the library to call the methods in this document:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
+const p = new Client({ apiKey: "" })
 ```
 </template>
 <template v-slot:es6>
@@ -37,17 +39,18 @@ import { Client } from '@passwordlessdev/passwordless-client';
 In all cases, your frontend must import the library to call the methods in this document:
 ```js
 import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs"
+const p = new Client({ apiKey: "" })
 ```
 </template>
-<template v-slot:http>
+<template v-slot:script>
 
-```http
+```html
 <script src="https://cdn.passwordless.dev/dist/0.4.0/passwordless.iife.js" crossorigin="anonymous"></script>
 ```
 In all cases, your frontend must import the library to call the methods in this document:
-```http
+```html
 <script>
-const p = new Passwordless.Client({});
+const p = new Passwordless.Client({ apiKey: "" });
 </script>
 ```
 
