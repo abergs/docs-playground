@@ -91,31 +91,34 @@ const p = new Passwordless.Client({
     apiKey: "myapplication:public:4364b1a49a404b38b843fe3697b803c8"
 });
 
-// Allow the user to specify a username or alias.
-const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
-try {    
-    // Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn". (only works with discoverable passkeys)
-    const { token, error } = await p.signinWithAutofill();
-    
-    // Option 2: Enables browsers to suggest passkeys by opening a UI prompt (only works with discoverable passkeys)
-    const { token, error } =  await p.signinWithDiscoverable();
-    
-    // Option 3: Use an alias specified by the user.
-    const email = "pjfry@passwordless.dev";
-    const { token, error } = await p.signinWithAlias(email);
-    
-    // Option 4: Use a userId if already known, for example if the user is re-authenticating.
-    const userId = "107fb578-9559-4540-a0e2-f82ad78852f7";
-    const { token, error } = await p.signinWithId(userId);
+  
+// Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn". (only works with discoverable passkeys)
+const { token, error } = await p.signinWithAutofill();
+
+// Option 2: Enables browsers to suggest passkeys by opening a UI prompt (only works with discoverable passkeys)
+const { token, error } =  await p.signinWithDiscoverable();
+
+// Option 3: Use an alias specified by the user.
+const email = "pjfry@passwordless.dev";
+const { token, error } = await p.signinWithAlias(email);
+
+// Option 4: Use a userId if already known, for example if the user is re-authenticating.
+const userId = "107fb578-9559-4540-a0e2-f82ad78852f7";
+const { token, error } = await p.signinWithId(userId);
+
+if(error) {
+    console.error(error);
+    // { errorCode: "unknown_credential", "title": "That credential is not registered with this website", "details": "..."}
 }
 
-// Call your backend to verify the generated token.
+// Call your backend to verify the token.
 const backendUrl = "https://localhost:8002"; // Your backend
 const verifiedUser = await fetch(backendUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
   // If successful, proceed!
+  // verifiedUser.userId = "107fb578-9559-4540-a0e2-f82ad78852f7";
 }
 ```
 
