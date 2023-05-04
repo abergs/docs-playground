@@ -19,8 +19,8 @@ Passwordless.dev offers paid organizations, which allow you to create an **unlim
 
 Users Pro applications are intended for use by businesses and individuals running web applications for public use, giving you all the tools you need to enable your end-users to authenticate with FIDO2 WebAuthn credentials. Users Pro applications are billing at the following rate:
 
-- $0.05/user up to 10,000 users
-- $0.01/user for 10,001+ users
+- $0.05/user, per month for up to 10,000 users
+- $0.01/user, per month for 10,001+ users
 
 The following table is a quick reference for the pricing structure under this plan:
 
