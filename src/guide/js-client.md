@@ -79,7 +79,7 @@ Successful implementation will prompt passwordless.dev to negotiate creation of 
 
 ## .signin()
 
-Call `.signin()` methods to generate a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. There are a few different `.signin()` methods available:
+Call the `.signin` methods to generate a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. There are a few different `.signin()` methods available:
 
 |Method|Description|Example|
 |------|-----------|-------|
@@ -124,6 +124,13 @@ if(verifiedUser.success === true) {
   // verifiedUser.userId = "107fb578-9559-4540-a0e2-f82ad78852f7";
 }
 ```
+
+### Response from .signin()
+
+All `.signin` methods return a object with two properties, commonly destrucuted as `const { token, error } = p.siginWithId()`.
+If the signin was successful, the `token` has a string value `"verify_xxyyzz`. If the signin failed, the `error` property contains the [problem details](errors.html#problem-details)
+
+
 
 ## .isBrowserSupported()
 
