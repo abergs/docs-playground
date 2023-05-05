@@ -1,4 +1,4 @@
-# API Reference
+# Backend API Reference
 
 The **passwordless.dev private API** is used by your backend to initiate key registrations, verify signins, retrieve keys for end-users, and more.
 
