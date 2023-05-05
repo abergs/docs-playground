@@ -279,8 +279,20 @@ Content-Type: application/json
 
 If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#status-codes).
 
-
-## Status codes
+<!--
+## Errors
+Passwordless.dev errors are formatted to the `Problem Details` [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807).
+HTTP API errors will have the following response body: 
+```json5
+{
+  "type": "https://docs.passwordless.dev/errors#missing_register_token",
+  "title": "The token you sent was not correct. The token used for this endpoint should start with 'register_'. Make sure you are not sending the wrong value.",
+  "status": 400,
+  "errorCode": "missing_register_token"
+}
+```
+-->
+### Status codes
 
 |HTTP Code|Message|Status|
 |----|----|----|
@@ -290,6 +302,16 @@ If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#
 |401|You did not identify yourself|:red_circle:|
 |409|Conflict (alias is already in use)|:red_circle:|
 |500|Something went very wrong and we have a bug|:red_circle:|
+
+<!--
+### Error Codes
+`missing_register_token`
+
+You will receive this error if you call `p.register(registerToken)` without a valid `registerToken` value.
+
+**How to resolve**: Verify that there is an expected value in `registerToken` (*it should start with* `register_`). You obtain a register token from your backend by calling the `/register/token` endpoint.
+-->
+
 
 <!-- ### Register - Begin
 
