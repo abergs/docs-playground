@@ -1,6 +1,6 @@
 # Errors
 
-Welcome to the fun page! Here's a collection of the difference errors you might run into.
+While errors are never fun, we've tried our best to make it easy to debug why you're receing an error. Here's a collection of the difference errors you might run into and how to solve them.
 
 ## Problem Details
 
@@ -50,3 +50,9 @@ You receive this error when you call `p.signinWith*()` - but the passkey that wa
 ##### Solution
 
 The solution is to remove the Passkey from the user device. This can be done in the Browser Settings or on the Operating Systems Credential Manager.
+
+### alias_used
+
+##### Reason
+
+##### Solution
