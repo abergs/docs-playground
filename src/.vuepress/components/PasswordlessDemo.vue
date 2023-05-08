@@ -26,13 +26,12 @@
 
 <script>
 import {generateName} from "./RandomName";
-import {Client} from "https://cdn.passwordless.dev/dist/esm/passwordless.mjs";
 
 // Passwordless integration
 const apiKey = "demobackend:public:c203e65b581443778ea4823b3ef0d6af";
 const backendUrl = "https://demo-backend.passwordless.dev";
 
-const p = new Client({ apiKey });
+const p = new Passwordless.Client({ apiKey });
 
 async function Register(alias) {
   const myToken = await fetch(backendUrl + "/create-token?alias=" + alias).then(
