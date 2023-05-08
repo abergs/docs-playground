@@ -194,9 +194,10 @@ if(verifiedUser.success === true) {
 
 Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (step 2 in the picture) before proceeding to act on the confirmed sign-in
 
-2. Validate the verification token by calling the passwordless.dev API's `/signin/verify` endpoint ([learn more](api/#signin-verify)) with generated token, for example:
+2. Validate the verification token by calling the passwordless.dev API's `/signin/verify` endpoint ([learn more](api.html/#signin-verify)) with generated token, for example:
 
 <Badge text="backend" type="warning"/>
+
 ```js
 // Code written for this step should run on your backend.
 
@@ -215,6 +216,7 @@ const response = await fetch(apiurl + "/signin/verify", {
 const body = await response.json();
 
 // Check the API response for successful verification.
+// To see all properties returned by this endpoint, checkout the Backend API reference for /signin/verify
 if (body.success) {
     console.log("Successfully verified sign-in for user.", body);
 } else {
@@ -239,7 +241,7 @@ Successful implementation of the above `POST` will return a success response inc
 }
 ```
 
-Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in (**step 1**).
+Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in (**step 1**) byt setting a cookie etc.
 
 ## Next steps
 
