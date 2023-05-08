@@ -61,7 +61,6 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 |`publicKey`|The shareable, cryptographic key that is used to send data to the API.|
 |`userHandle`|The unique identifier that is associated with a specific user account. It can be used to retreive information about the user.|
 |`signatureCounter`|The number of times this credential has been used for authentication.|
-|`credType`|The [attestation format](https://www.iana.org/assignments/webauthn/webauthn.xhtml) used by this credential, only relevant if the attestation type is not `none`.|
 |`createdAt`|Timestamp (UTC) when the credential was registered for the application.|
 |`aaGuid`|The Authenticator Attestation GUID is a unique identifier that is used to identify your authenticator when it is registered.|
 |`lastUsedAt`|Timestamp (UTC) when the credential was last used for authentication for the application.|
