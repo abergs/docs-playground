@@ -30,7 +30,7 @@ It's important to download your API keys to a safe place, as they will be remove
 Next, install the [passwordless.dev JavaScript client library](js-client), either globally or as a module within your application. This library will allow your application to interact with the passwordless.dev API and with browsers' WebAuthn API. To install the library:
 
 
-<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',http:'http'}">
+<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',html:'html'}">
 <template v-slot:bash1>
 
 ```bash
@@ -54,20 +54,22 @@ import { Client } from '@passwordlessdev/passwordless-client';
 <template v-slot:es6>
 
 ```http
-<script src="https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs" crossorigin="anonymous"></script>
+<script src="https://cdn.passwordless.dev/dist/1.1.0/esm/passwordless.min.mjs" crossorigin="anonymous"></script>
 ```
 In all cases, your frontend must import the library to call the methods used by passwordless.dev:
-```js
-import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs"
+```html
+<script type="module">
+    import { Client } from "https://cdn.passwordless.dev/dist/1.1.0/esm/passwordless.min.mjs"
+</script>
 ```
 </template>
-<template v-slot:http>
+<template v-slot:html>
 
-```http
-<script src="https://cdn.passwordless.dev/dist/0.4.0/passwordless.iife.js" crossorigin="anonymous"></script>
+```html
+<script src="https://cdn.passwordless.dev/dist/1.1.0/umd/passwordless.umd.min.js" crossorigin="anonymous"></script>
 ```
 In all cases, your frontend must import the library to call the methods used by passwordless.dev:
-```http
+```html
 <script>
 const Client = Passwordless.Client;
 const p = new Client({});

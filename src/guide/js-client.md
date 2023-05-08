@@ -11,7 +11,7 @@ All methods **require** your API [public key](concepts.html#api-keys) for authen
 
 To install the passwordless.dev JavaScript client:
 
-<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',script:'Script tag'}">
+<CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',html:'html'}">
 <template v-slot:bash1>
 
 ```bash
@@ -36,19 +36,19 @@ const p = new Client({ apiKey: "" })
 </template>
 <template v-slot:es6>
 
-```http
-<script src="https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs" crossorigin="anonymous"></script>
-```
 In all cases, your frontend must import the library to call the methods in this document:
-```js
-import { Client } from "https://cdn.passwordless.dev/dist/0.3.0/passwordless.min.mjs"
+
+```html
+<script type="module">
+import { Client } from "https://cdn.passwordless.dev/dist/1.1.0/esm/passwordless.min.mjs"
 const p = new Client({ apiKey: "" })
+</script>
 ```
 </template>
 <template v-slot:script>
 
 ```html
-<script src="https://cdn.passwordless.dev/dist/0.4.0/passwordless.iife.js" crossorigin="anonymous"></script>
+<script src="https://cdn.passwordless.dev/dist/1.1.0/umd/passwordless.umd.min.js" crossorigin="anonymous"></script>
 ```
 In all cases, your frontend must import the library to call the methods in this document:
 ```html
