@@ -52,7 +52,14 @@ Registering an application with the [passwordless.dev admin console](get-started
   <application-name>:secret:<guid>
   ```
 
-### Credentials
+### Passkey
+
+Passkeys are a replacement for passwords. They are based on secure cryptography, easy to use, resistant against phising attacks and even breach resistant.
+
+*A more technical definition:* A passkey is a FIDO2 Discoverable Credential that is protected against device loss.
+
+
+### Credential
 A credential represents a FIDO2 authenticator that is registered by passwordless.dev for a user. Examples of credentials include [device-bound passkeys](https://fidoalliance.org/passkeys/) and [hardware security keys](https://www.yubico.com/products/security-key/). For each credential, the following information is stored:
 
 |Test|Test|
