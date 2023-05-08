@@ -39,7 +39,7 @@ const payload = {
   "authenticatorType": "any", // WebAuthn authenticator attachment modality. Can be "any" (default), "platform" which triggers client device-specific options Windows Hello, FaceID, or TouchID, or "cross-platform", which triggers roaming options like security keys.
   "userVerification": "preferred", // Whether the relying party requires locally-invoked authorization for the operation. Can be "preferred" (default), "required", or "optional".
   "aliases": ["pjfry@passwordless.dev"], // An array of user-created identifiers, like emails, which are used to reference a userId.
-  "aliasHashing": false // Whether aliases should be hashed before being stored. Defaults to false
+  "aliasHashing": true // Whether aliases should be hashed before being stored. Defaults to true
 };
 
 // POST the payload to the passwordless.dev API using your API private secret.
@@ -66,7 +66,7 @@ The request body may include additional parameters besides those required, all o
 |`userVerification`|Allows choosing preference for requiring User Verification (biometrics, pin code etc) when authenticating  Can be `preferred` (default), `required` or `discouraged`.|`preferred`
 |`expiresAt`|Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.|`3023-08-01T14:43:03Z`|
 |`aliases`| A array of aliases for the UserId, such as an email or username. Used to initiate a signin on the client side with the `signinWithAlias()` method. An alias must be unique to the UserId. Defaults to an empty array `[]`.|`['pjfry@passwordless.dev']`|
-|`aliasHashing`|Whether aliases should be hashed before being stored. Defaults to |`false`|
+|`aliasHashing`|Whether aliases should be hashed before being stored. Defaults to |`true`|
 
 
 ### Response
