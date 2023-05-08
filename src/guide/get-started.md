@@ -219,6 +219,7 @@ const body = await response.json();
 // To see all properties returned by this endpoint, checkout the Backend API reference for /signin/verify
 if (body.success) {
     console.log("Successfully verified sign-in for user.", body);
+    // set cookie/userid
 } else {
     console.warn("Sign in failed.", body);
 }
