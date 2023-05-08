@@ -10,7 +10,7 @@ In this guide we'll provide JavaScript examples, however you can check out sampl
 
 ## Sign up
 
-Sign up for a passwordless.dev account [here](https://adminconsole-devtest.azurewebsites.net/Account/Login). Bitwarden offers a free passwordless.dev account, or paid plans that [unlock certain tiers of usage and features](plans).
+Sign up for a passwordless.dev account [here](https://admin.passwordless.dev/signup). Bitwarden offers a free passwordless.dev account, or paid plans that [unlock certain tiers of usage and features](https://bitwarden.com/pricing/passwordless/).
 
 When you sign up you'll land on the [Admin Console](admin-console), your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
 
@@ -97,7 +97,7 @@ const payload = {
   "displayname": "Philip J. Fry", // A human-palatable name for the account, which should be chosen by the user.
   "username": "pjfry@passwordless.dev", // A username used for user authentication, should be chosen by the user.  
   "authType": "platform", // WebAuthn authenticator attachment modality. Can be "platform" (default), which triggers client device-specific options Windows Hello, FaceID, or TouchID, or "cross-platform", which triggers roaming options like security keys.
-  "discoverable": true,
+  "discoverable": true, // [Definition for "discoverable"]
   "userVerification": "preferred", // Whether the relying party requires locally-invoked authorization for the operation. Can be "preferred" (default), "required", or "optional".
 };
 
@@ -234,4 +234,4 @@ Congratulations on mastering a basic implementation of passwordless.dev! Next:
 
 - Check out other [Backend Languages](backend) and [Frontend Frameworks](frontend) to find the best fit for your application.
 - Dig into the functionality offered by the [Admin Console](admin-console).
-- Figure out the [best plan](plans) to fit the needs of your application or business.
+- Figure out the [best plan](https://bitwarden.com/pricing/passwordless/) to fit the needs of your application or business.

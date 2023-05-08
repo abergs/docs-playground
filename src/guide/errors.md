@@ -1,12 +1,10 @@
 # Errors
 
-While errors are never fun, we've tried our best to make it easy to debug why you're receing an error. Here's a collection of the difference errors you might run into and how to solve them.
+While errors are never fun, we've tried our best to make it easy to determine why you're receiving an error. Here's a collection of the different errors you might run into and how to solve them.
 
 ## Problem Details
 
-All our errors are formatted as `Problem Details` [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807).
-
-That means our HTTP API and Client Side code return errors that look like this:
+All errors are formatted as `Problem Details` [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807), meaning our HTTP API and Client Side code return errors that look like this:
 
 ```json5
 {
@@ -19,7 +17,7 @@ That means our HTTP API and Client Side code return errors that look like this:
 
 ### How do I see errors on the client side?
 
-Please take a look at our front end examples. Our Javascript functions return a object containing either a token or a error `{ token: string, error: ProblemDetails}`.
+Please take a look at our front end examples. Passwordless.dev JavaScript functions return a object containing either a token or an error: `{ token: string, error: ProblemDetails}`.
 
 ```ts
 const { token, error } = p.signinWithDiscoverable();
@@ -34,22 +32,20 @@ if(error) {
 ### missing_register_token
 
 ##### Reason
-You receive this error when you call `p.register(registerToken)` - but the value of `registerToken` is empty or invalid.
+You receive this error when you call `p.register(registerToken)` but the value of `registerToken` is empty or invalid.
 
 ##### Solution
 
-Make sure you have a expected value in your `registerToken`. Hint: It should start with `register_`.
-
-You obtain a register token from your backend by calling the `/register/token` endpoint.
+Make sure you have an expected value in your `registerToken`. Obtain a register token from your backend by calling the `/register/token` endpoint. It should start with `register_`.
 
 ### unknown_credential
 
 ##### Reason
-You receive this error when you call `p.signinWith*()` - but the passkey that was used is not registered in our system. This can happen if the passkey has been deleted on the server (e.g. removing it in your app UI or the Admin Console) but still exists on a users device.
+You receive this error when you call `p.signinWith*()` but the passkey that was used is not registered in our system. This can happen if the passkey has been deleted on the server (e.g. removing it in your app UI or the Admin Console) but still exists on a users device.
 
 ##### Solution
 
-The solution is to remove the Passkey from the user device. This can be done in the Browser Settings or on the Operating Systems Credential Manager.
+The solution is to remove the passkey from the user device. This can be done in the Browser's settings or on the Operating Systems Credential Manager.
 
 ### alias_used
 

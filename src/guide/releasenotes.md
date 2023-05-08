@@ -2,10 +2,10 @@
 
 ## General Availability
 
-Bitwarden is proud to announce General Availability of **passwordless.dev**! GA improvements include:
+Bitwarden is proud to announce General Availability of **Passwordless.dev**! GA improvements include:
 
+- An all-new [admin console](admin-console) to help you quickly get started implementing passwordless, configuring settings, and monitoring users.
 - A suite of updates to the [Javascript Client](js-client) and [API](api).
-- An all-new admin console to help you quickly get started implementing passwordless, configuring settings, and monitoring users ([learn more](admin-console)).
 
 :::warning
 **To users of the beta**, the GA release of passwordless.dev includes breaking changes to the API that will be released to a net-new service. All beta users [sign up for the GA service]() as soon as they're able and make the following changes to their implementation:
@@ -14,5 +14,5 @@ Bitwarden is proud to announce General Availability of **passwordless.dev**! GA 
 - Replace beta service API URLs with GA service URLs.
 - Update your [frontend code](js-client) and [backend code](api) according to the documentation.
 
-Data migration from the beta to GA service is not currently available, however beta service will remain live and available for __ months after GA release to give you time to make the move.
+Data migration from the beta to GA service is not currently available, however beta service will remain live and available after GA release to give you time to make the move.
 :::

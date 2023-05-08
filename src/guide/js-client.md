@@ -80,16 +80,16 @@ const { token, error } = await p.register(registerToken);
 
 Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
 
-## .signin()
+## .signinWith()
 
 Call the `.signin` methods to generate a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. There are a few different `.signinWith*()` methods available:
 
 |Method|Description|Example|
 |------|-----------|-------|
-|`.signinWithAutofill()`|Triggers the Browser native autofill UI to select identity and sign in|`verify_token = await p.signinWithAutofill();`|
-|`.signinWithDiscoverable()`|Triggers the Browsers native UI prompt to select identity and sign in |`verify_token = await p.signinWithDiscoverable();`|
-|`.signinWithAlias(alias)`|Uses a [alias](api.html#alias) (e.g. email,username) to specify the user|`verify_token = await p.signinWithAlias(email);`|
-|`.signinWithId(id)`|Uses the UserId to specify the user|`verify_token = await p.signinWithId(userId);`|
+|`.signinWithAutofill()`|Triggers the Browser native autofill UI to select identity and sign in.|`verify_token = await p.signinWithAutofill();`|
+|`.signinWithDiscoverable()`|Triggers the Browsers native UI prompt to select identity and sign in. |`verify_token = await p.signinWithDiscoverable();`|
+|`.signinWithAlias(alias)`|Uses a [alias](api.html#alias) (e.g. email,username) to specify the user.|`verify_token = await p.signinWithAlias(email);`|
+|`.signinWithId(id)`|Uses the UserId to specify the user.|`verify_token = await p.signinWithId(userId);`|
 
 ```js
 // Instantiate a passwordless client using your API public key.
@@ -99,11 +99,11 @@ const p = new Passwordless.Client({
 
 
 // Generate a verification token for the user.
-  
-// Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn". (only works with discoverable passkeys)
+
+// Option 1: Enable browsers to suggest passkeys for any input that has autofill="webauthn" (only works with discoverable passkeys).
 const { token, error } = await p.signinWithAutofill();
 
-// Option 2: Enables browsers to suggest passkeys by opening a UI prompt (only works with discoverable passkeys)
+// Option 2: Enables browsers to suggest passkeys by opening a UI prompt (only works with discoverable passkeys).
 const { token, error } =  await p.signinWithDiscoverable();
 
 // Option 3: Use an alias specified by the user.
@@ -128,9 +128,9 @@ if(verifiedUser.success === true) {
 }
 ```
 
-### Response from .signinWith*()
+### Response
 
-All `.signin` methods return a object with two properties, commonly destrucuted as:
+All `.signinWith*()` methods return a object with two properties, commonly destrucuted as:
 ```
 // destructured
 const { token, error } = await p.siginWithId(123)
@@ -140,11 +140,9 @@ const signinResponse = await p.signinWithId(123);
 console.log(signinResponse.token) // "verify_xxyyzz"
 console.log(signinResponse.error) // undefined or a Problem Details object
 
-``` 
+```
 
-If the signin was successful, the `token` has a string value `"verify_xxyyzz`. If the signin failed, the `error` property contains the [problem details](errors.html#problem-details)
-
-
+If the signin was successful, the `token` has a string value `"verify_xxyyzz`. If the signin failed, the `error` property contains the [problem details](errors.html#problem-details).
 
 ## .isBrowserSupported()
 
