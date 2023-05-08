@@ -87,11 +87,12 @@ Next, implement a workflow on your backend and frontend for registering a [passk
 
 Let's break down these 3 steps:
 
-<Badge text="backend" type="warning"/>
-1. On your backend, Generate a [registration token](api#register-token) by calling the passwordless.dev API's `/register/token` endpoint ([What is a token?](concepts/#tokens)).
+
+1. On your backend, generate a [registration token](api#register-token) by calling the passwordless.dev API's `/register/token` endpoint ([What is a token?](concepts/#tokens)).
 
 While you can send in a number of options, The minimum arguments are `userId` and `username` for the user, for example:
 
+<Badge text="backend" type="warning"/>
 
 ```js
 
@@ -125,11 +126,15 @@ Successful implementation will create a registration token returned that is retu
 Should your API request fail, you will receive a error response with json formatted [Problem Details](errors)
 :::
 
-2. Initiate, client-side, the WebAuthn process to create and store a WebAuthn credential using the generated registration token ([learn more](js-client)), for example:
+
+
+2. On your frontend, initiate the WebAuthn process to create and store a WebAuthn credential using the generated registration token ([learn more](js-client)), for example:
 
 <Badge text="frontend" type="tip"/>
+
 ```js
 // Code written for this step should run on your frontend.
+import {Client} from "@passwordlessdev/passwordless-client";
 
 // Instantiate a passwordless client using your API public key.
 const p = new Client({
@@ -154,15 +159,16 @@ Successful implementation will prompt passwordless.dev to negotiate creation of 
 
 ## Build a signin flow
 
-Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#credentials). At a high-level, here's what you'll be doing:
+Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#passkey). At a high-level, here's what you'll be doing:
 
 ![Signin workflow flow](./signin-diagram.png)
 
 Code that you write must:
 
-1. Generate, client-side, a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. Include the user's `userId` or alias ([learn more](js-client.html#signin)), for example:
+1. On your frontend, initiate your signin and retrieve a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. To initiate the signin, you can use an alias, userId or a Discoverable credential  ([learn more](js-client.html#signin)), for example:
 
 <Badge text="frontend" type="tip"/>
+
 ```js
 // Code written for this step should run on your frontend.
 
@@ -176,6 +182,7 @@ const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
 const {token, error} = await p.signinWithAlias(alias);
+// tip: You can also try p.signinWithDiscoverable();
 
 // Call your backend to verify the generated token.
 const backendUrl = "https://localhost:7002"; // Your backend
@@ -185,7 +192,7 @@ if(verifiedUser.success === true) {
 }
 ```
 
-Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (**step 2**) before proceeding to act on the confirmed sign-in
+Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (step 2 in the picture) before proceeding to act on the confirmed sign-in
 
 2. Validate the verification token by calling the passwordless.dev API's `/signin/verify` endpoint ([learn more](api/#signin-verify)) with generated token, for example:
 
