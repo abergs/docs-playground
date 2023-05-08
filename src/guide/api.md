@@ -203,7 +203,7 @@ A few rules to take into consideration when allowing users to create aliases:
 <template v-slot:http>
 
 ```http
-GET /credentials/list?userId=107fb578-9559-4540-a0e2-f82ad78852f7 HTTP/1.1
+GET https://v4.passwordless.dev/credentials/list?userId=107fb578-9559-4540-a0e2-f82ad78852f7 HTTP/1.1
 ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 ```
 </template>
@@ -263,7 +263,7 @@ If successful, the `/list` endpoint will return an array of `.json` objects wher
 `POST` requests made to the `/delete` endpoint delete a specific credential associated with a user, as dictated by a `credentialId`. The request **must include** the `credentialId` in question, for example:
 
 ```http
-POST /credentials/delete HTTP/1.1
+POST https://v4.passwordless.dev/credentials/delete HTTP/1.1
 ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 Content-Type: application/json
 
