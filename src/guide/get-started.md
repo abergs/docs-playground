@@ -102,7 +102,7 @@ const payload = {
 };
 
 // POST the payload to the passwordless.dev API using your API private secret.
-const apiUrl = "https://v3.passwordless.dev";
+const apiUrl = "https://v4.passwordless.dev";
 const {token} = await fetch(apiUrl + "/register/token", {
     method: "POST",
     body: JSON.stringify(payload),
@@ -191,7 +191,7 @@ Successful implementation will make a verification token available to the backen
 const token = { token: req.query.token };
 
 // POST the verification token to the passwordless.dev API using your API private secret.
-const apiUrl = "https://v3.passwordless.dev";
+const apiUrl = "https://v4.passwordless.dev";
 const response = await fetch(apiurl + "/signin/verify", {
     method: "POST",
     body: JSON.stringify({token}),

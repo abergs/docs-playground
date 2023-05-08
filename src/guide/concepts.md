@@ -104,7 +104,7 @@ The chart provides an illustration of the credential registration workflow with 
 
 1. Your backend will make a call to the Passwordless.dev API ```/register/token``` endpoint with the ```username/id``` of the user.
 ```
-POST https://v3.passwordless.dev/register/token
+POST https://v4.passwordless.dev/register/token
 ApiSecret: demo:secret:yyy
 Content-Type: application/json
 
@@ -168,7 +168,7 @@ if(verifiedUser.success === true) {
 2. Once the client-side code has finished the WebAuthn process, the token needs to be verified with the backend API. Once compelted, the WebAuthn process can succeed and identify what user has signed in.
 
 ```
-POST https://v3.passwordless.dev/signin/verify
+POST https://v4.passwordless.dev/signin/verify
 ApiSecret: demo:secret:yyy
 Content-Type: application/json
 

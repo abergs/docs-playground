@@ -44,11 +44,11 @@ module.exports = {
       },
       {
         text: 'Sign Up',
-        link: 'https://adminconsole01.andersaberg.com/'
+        link: 'https://admin.passwordless.dev/signup'
       },
       {
         text: 'Home',
-        link: 'https://beta.passwordless.dev'
+        link: 'https://docs.passwordless.dev'
       }
     ],
     sidebar: {
