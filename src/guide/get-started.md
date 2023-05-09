@@ -120,7 +120,7 @@ Successful implementation will create a registration token returned that is retu
 ```
 
 ::: tip
-Should your API request fail, you will receive a error response with `json`-formatted [Problem Details](errors).
+Should your API request fail, you will receive a error response with `json`-formatted [problem details](errors).
 :::
 
 2. On your frontend, initiate the WebAuthn process to create and store a WebAuthn credential using the generated registration token ([learn more](js-client)), for example:

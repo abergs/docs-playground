@@ -89,7 +89,7 @@ Call the `.signin` methods to generate a [verification token](concepts.html#toke
 |`.signinWithAutofill()`|Triggers the Browser native autofill UI to select identity and sign in.|`verify_token = await p.signinWithAutofill();`|
 |`.signinWithDiscoverable()`|Triggers the Browsers native UI prompt to select identity and sign in. |`verify_token = await p.signinWithDiscoverable();`|
 |`.signinWithAlias(alias)`|Uses a [alias](api.html#alias) (e.g. email,username) to specify the user.|`verify_token = await p.signinWithAlias(email);`|
-|`.signinWithId(id)`|Uses the UserId to specify the user.|`verify_token = await p.signinWithId(userId);`|
+|`.signinWithId(id)`|Uses the userId to specify the user.|`verify_token = await p.signinWithId(userId);`|
 
 ```js
 // Instantiate a passwordless client using your API public key.
@@ -138,7 +138,7 @@ const { token, error } = await p.siginWithId(123)
 // plain object
 const signinResponse = await p.signinWithId(123);
 console.log(signinResponse.token) // "verify_xxyyzz"
-console.log(signinResponse.error) // undefined or a Problem Details object
+console.log(signinResponse.error) // undefined or a problem details object
 
 ```
 

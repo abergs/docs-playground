@@ -2,9 +2,9 @@
 
 While errors are never fun, we've tried our best to make it easy to determine why you're receiving an error. Here's a collection of the different errors you might run into and how to solve them.
 
-## Problem Details
+## Problem details
 
-All errors are formatted as `Problem Details` [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807), meaning our HTTP API and Client Side code return errors that look like this:
+All errors are formatted as problem details [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807), meaning our HTTP API and client-side code return errors that look like this:
 
 ```json5
 {
@@ -17,12 +17,12 @@ All errors are formatted as `Problem Details` [RFC-7807](https://www.rfc-editor.
 
 ### How do I see errors on the client side?
 
-Please take a look at our front end examples. Passwordless.dev JavaScript functions return a object containing either a token or an error: `{ token: string, error: ProblemDetails}`.
+Please take a look at our frontend examples. Passwordless.dev JavaScript functions return an object containing either a token or an error: `{ token: string, error: ProblemDetails}`.
 
 ```ts
 const { token, error } = p.signinWithDiscoverable();
 if(error) {
-  console.error(error); // console logs a Problem Details object
+  console.error(error); // Console logs a problem details object.
 }
 
 ```
@@ -45,36 +45,36 @@ You receive this error when you call `p.signinWith*()` but the passkey that was 
 
 ##### Solution
 
-The solution is to remove the passkey from the user device. This can be done in the Browser's settings or on the Operating Systems Credential Manager.
+The solution is to remove the passkey from the user device. This can be done in the browser's settings or on the Operating Systems Credential Manager.
 
 ### missing_userid
 
-You receive this error while calling `/register/token` and fail to supply the UserId property in the json payload. 
+You receive this error while calling `/register/token` and fail to supply the userId property in the `json` payload.
 
 ##### Reason
-When creating a reigster_token you must supply a valid UserId.
+When creating a register_token you must supply a valid userId.
 
 ##### Solution
 
-Add a UserId to your payload, e.g:
+Add a userId to your payload, e.g:
 
 ```json5
 {
-  "UserId": "123",
+  "userId": "123",
   "Username": "pjfry@passwordless.dev"
 }
 ```
 
 ### expired_token
 
-You receive this error when you're trying to use a token to either A) register a passkey or B) verify a signin.  
+You receive this error when you're trying to use a token to either A) register a passkey or B) verify a sign-in.  
 
 ##### Reason
-The token you're trying to use have expired. By default, tokens are only valid for 120 seconds.
+The token you're trying to use has expired. By default, tokens are only valid for 120 seconds.
 
 ##### Solution
 
-Make sure you use your tokens immediately when they are being created. Tokens are meant to be short lived. If your use case requires it, the expiration can be configured when creating the token.
+Make sure you use your tokens immediately when they are being created. Tokens are meant to be short-lived. If your use case requires it, the expiration can be configured when creating the token.
 
 
 ### alias_conflict
@@ -82,7 +82,7 @@ Make sure you use your tokens immediately when they are being created. Tokens ar
 You receive this error if you're trying to set or update the aliases of a user.
 
 ##### Reason
-The alias you are trying to use is already being used by a different UserId.
+The alias you are trying to use is already being used by a different userId.
 
 ##### Solution
 

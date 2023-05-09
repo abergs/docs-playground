@@ -65,7 +65,7 @@ The request body may include additional parameters besides those required, all o
 |`discoverable`| If `true`, creates a Client Side Discoverable Credential that allows sign in without needing a username.|`true` (default)|
 |`userVerification`|Allows choosing preference for requiring User Verification (biometrics, pin code etc) when authenticating  Can be `"preferred"` (default), `"required"` or `"discouraged"`.|`"preferred"`
 |`expiresAt`|Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.|`"3023-08-01T14:43:03Z"`|
-|`aliases`| A array of aliases for the UserId, such as an email or username. Used to initiate a signin on the client side with the `signinWithAlias()` method. An alias must be unique to the UserId. Defaults to an empty array `[]`.|`["pjfry@passwordless.dev"]`|
+|`aliases`| A array of aliases for the userId, such as an email or username. Used to initiate a signin on the client side with the `signinWithAlias()` method. An alias must be unique to the userId. Defaults to an empty array `[]`.|`["pjfry@passwordless.dev"]`|
 |`aliasHashing`|Whether aliases should be hashed before being stored. Defaults to `true`.|`true`|
 
 
@@ -156,7 +156,7 @@ POST https://v4.passwordless.dev/alias HTTP/1.1
 ApiSecret: myapplication:secret:11f8dd7733744f2596f2a28544b5fbc4
 Content-Type: application/json
 
-{ "UserId": "107fb578-9559-4540-a0e2-f82ad78852f7", "aliases": ["pjfry@passwordless.dev", "benderrules@passwordless.dev"], "hashing": true }
+{ "userId": "107fb578-9559-4540-a0e2-f82ad78852f7", "aliases": ["pjfry@passwordless.dev", "benderrules@passwordless.dev"], "hashing": true }
 ```
 </template>
 <template v-slot:js>
@@ -278,7 +278,7 @@ If successful, the `/delete` endpoint will return an HTTP 200 OK [status code](#
 
 <!--
 ## Errors
-Passwordless.dev errors are formatted to the `Problem Details` [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807).
+Passwordless.dev errors are formatted to the `problem details` [RFC-7807](https://www.rfc-editor.org/rfc/rfc7807).
 HTTP API errors will have the following response body:
 ```json5
 {
