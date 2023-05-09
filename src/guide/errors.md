@@ -64,3 +64,14 @@ Add a UserId to your payload, e.g:
   "Username": "pjfry@passwordless.dev"
 }
 ```
+
+### old_token
+
+You receive this error when you're trying to use a token to either A) register a passkey or B) verify a signin.  
+
+##### Reason
+The token you're trying to use have expired. By default, tokens are only valid for 120 seconds.
+
+##### Solution
+
+Make sure you use your tokens immediately when they are being created. Tokens are meant to be short lived. If your use case requires it, the expiration can be configured when creating the token.
