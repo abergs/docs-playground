@@ -58,6 +58,8 @@ Registering an application with the [passwordless.dev admin console](get-started
 
 Passkeys are a replacement for passwords. They are based on secure cryptography, easy to use, resistant against phising attacks and even breach resistant.
 
+A Passkey can have MFA properties when User Verification is enabled, requiring something you have (the Private Key) and something you know/are (Pin code / biometrics).
+
 *A more technical definition:* A passkey is a FIDO2 Discoverable Credential that is protected against device loss.
 
 
