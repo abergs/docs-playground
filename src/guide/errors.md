@@ -65,7 +65,7 @@ Add a UserId to your payload, e.g:
 }
 ```
 
-### old_token
+### expired_token
 
 You receive this error when you're trying to use a token to either A) register a passkey or B) verify a signin.  
 
