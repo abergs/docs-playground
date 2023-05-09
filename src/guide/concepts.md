@@ -64,13 +64,13 @@ A Passkey can have MFA properties when User Verification is enabled, requiring s
 
 
 ### Credential
-A credential represents a FIDO2 authenticator that is registered by passwordless.dev for a user. Examples of credentials include [device-bound passkeys](https://fidoalliance.org/passkeys/) and [hardware security keys](https://www.yubico.com/products/security-key/). For each credential, the following information is stored:
+A credential represents a FIDO2 authenticator that is registered by passwordless.dev for a user. Examples of credentials include [passkeys](https://fidoalliance.org/passkeys/) and [hardware security keys](https://www.yubico.com/products/security-key/). For each credential, the following information is stored:
 
 |Proprety|Description|
 |----|----|
-|`descriptor`|A string of text that identifies the application or service using the credential.|
+|`descriptorId`|A string of text that identifies the application or service using the credential. Also refered to as the `credentialId`|
 |`publicKey`|The shareable, cryptographic key that is used to send data to the API.|
-|`userHandle`|The unique identifier that is associated with a specific user account. It can be used to retreive information about the user.|
+|`userId`|The unique identifier that is associated with a specific user account. It can be used to retreive information about the user.|
 |`signatureCounter`|The number of times this credential has been used for authentication.|
 |`createdAt`|Timestamp (UTC) when the credential was registered for the application.|
 |`aaGuid`|The Authenticator Attestation GUID is a unique identifier that is used to identify your authenticator when it is registered.|
@@ -79,8 +79,7 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 |`origin`|The domain name or IP address of the service using the API.|
 |`country`|Country code indicating where the credential is located or registered.|
 |`device`|Device information for the device on which the credential resides, for example `Chrome, Mac OS X 10`.|
-|`nickname`|A user-specified name associated with this specific credential.|
-|`userId`|The `userId` of the end-user associated with the credential.|
+|`nickname`|A user-specified name associated with this specific credential, for example `My Macbook`.|
 
 ### Dicoverable Credential
 
@@ -102,109 +101,3 @@ The ID for relying parties provides the technology platform and identification t
 
 ### User verification
 A FIDO2 server RP can interact with an authenticator to verify a user. This can be done via PIN code, biometrics, or other 2FA methods that securely verify that the proper person is accessing an account.
-
-<!--
-
-# Registering and signing in
-
-To better understand how Passwordless.dev works, we have provided illustrations and explinations of the registration and signin processes.
-
-## Credential workflow
-
-![Passwordless Signing](/passwordless.register.png)
-
-The chart provides an illustration of the credential registration workflow with Passwordless.dev. Here is how the steps occur:
-
-1. Your backend will make a call to the Passwordless.dev API ```/register/token``` endpoint with the ```username/id``` of the user.
-```
-POST https://v4.passwordless.dev/register/token
-ApiSecret: demo:secret:yyy
-Content-Type: application/json
-
-{ "UserId": "123", "username": "Jsmith@passwordlessuser.com", "displayName": "Mr. Joe Smith" }
-```
-Response ```200 OK```
-
-```
-"register_wWdDh02ItIvnCKT_02ItIvn..."
-```
-
-
-2. The client-side initaites the WebAuthn process. The credentials are now stored with the Passwordless.dev API via the token.
-The client-side library can be retreived [here](https://github.com/passwordless/passwordless-client-js) through cdn or npm.
-Your client-side code will now start the registration process. WebAuthn will allow keys to be stored in the Passwordless.dev API.
-```
-var p = new Passwordless.Client({
-    apiKey: "demo:public:6b08891222194fd1992465f8668f"
-});
-
-// register_wWdDh02ItIvnCKT_02ItIvn...
-var myToken = await fetch("/example-backend/passwordless/token").then(r => r.text());
-
-try {
-    await p.register(myToken);
-    // success!
-} catch (e) {
-    // error    
-}
-```
-
-# How it works
-
-## Sign-in flow
-
-![Sign in](/passwordless.signin.png)
-
-The chart provides an illustration of the sign in process with Passwordless.dev. Here is how the steps occur:
-
-1. Start the Passwordles sign in
-Retrieve the clience-side library [here](https://github.com/passwordless/passwordless-client-js) from cdn or npm. Pass an alias or id to the sign in method to begin the WebAuthn process.
-```
-var p = new Passwordless.Client({
-    apiKey: "demo:public:6b08891222194fd1992465f8668f"
-});
-
-var alias = "John@user.com"; // get username from input
-
-// returns verify_yUf6_wWdDh02ItIvnCKT_02ItIvn...
-var token = await p.signinWithAlias(alias);
-// var token = await p.signinWithConditional(); // Uses what is known as the Conditional UI to sign in using autocomplete in the browser
-// var token = await p.signinWithId("123"); // if you did not set an alias, you can signin with the UserId.
-
-// verify the token
-var verifiedUser = await fetch("/example-backend/passwordless/signin?token=" + token).then(r => r.json());
-if(verifiedUser.success === true) {
-    //success!
-}
-```
-
-2. Once the client-side code has finished the WebAuthn process, the token needs to be verified with the backend API. Once compelted, the WebAuthn process can succeed and identify what user has signed in.
-
-```
-POST https://v4.passwordless.dev/signin/verify
-ApiSecret: demo:secret:yyy
-Content-Type: application/json
-
-{ "token": "verify_yUf6_wWdDh02ItIvnCKT_02ItIvn..." }
-```
-
-Response:
-
-```
-{
-  "success": true,
-  "userId": "123",
-  "timestamp": "2021-08-01T01:33:36.9773187Z",
-  "rpid": "example.com",
-  "origin": "http://example.com:3000",
-  "device": "Chrome, Windows 10",
-  "country": "",
-  "nickname": "Home laptop",
-  "credentialId": "Mq1ZhrHBmhly34YaO/uuXuNuf/VCHDkuknENz/LZJR4=",
-  "expiresAt": "2021-08-01T01:35:36.9773193Z"
-}
-```
-
-Once a successful response has been recoreded you are done! For additional information on the API and other endpoints, see [here].
-
--->
