@@ -13,9 +13,11 @@ In this guide we'll provide JavaScript examples, however you can check out sampl
 [Sign up](https://admin.passwordless.dev/signup) for a free Passwordless.dev account. Bitwarden offers a free Passwordless.dev account, or paid plans that [unlock certain tiers of usage and features](http://bitwarden.com/products/passwordless/).
 
 When you sign up you'll land on the [admin console](admin-console), your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
-
+</br>
+</br>
 ![Admin console](./admin-console.png)
-
+</br>
+</br>
 
 ## Create an application
 
@@ -82,9 +84,11 @@ const p = new Client({});
 ## Build a registration flow
 
 Next, implement a workflow on your backend and frontend for registering a [passkey](concepts.html#passkey). At a high-level, here's what you'll be doing:
-
+</br>
+</br>
 ![Register credential workflow](./register-diagram.png)
-
+</br>
+</br>
 Let's break down these steps:
 
 1. On your backend, generate a [registration token](api#register-token) by calling the passwordless.dev API's `/register/token` endpoint ([What is a token?](concepts/#tokens)). While you can send in a number of options, the minimum arguments are `userId` and `username`, for example:
@@ -154,12 +158,14 @@ Successful implementation will prompt Passwordless.dev to negotiate creation of 
 ## Build a signin flow
 
 Next, implement a workflow on your backend and frontend for signing in with a [passkey](concepts.html#passkey). At a high-level, here's what you'll be doing:
-
+</br>
+</br>
 ![Signin workflow flow](./signin-diagram.png)
-
+</br>
+</br>
 Code that you write must:
 
-1. On your frontend, initiate your sign-in and retrieve a [verification token](concepts.html#tokens) that will afterward be checked by your backend to complete a sign-in. To initiate the sign-in, you can use an alias, userId, or Discoverable Credential  ([learn more](js-client.html#signin)), for example:
+1. On your frontend, initiate your sign-in and retrieve a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. To initiate the sign-in, you can use an alias, userId, or Discoverable Credential  ([learn more](js-client.html#signin)), for example:
 
 <Badge text="frontend" type="tip"/>
 
