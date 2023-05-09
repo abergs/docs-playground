@@ -64,7 +64,7 @@ Passkeys are a replacement for passwords. They are based on secure cryptography,
 ### Credential
 A credential represents a FIDO2 authenticator that is registered by passwordless.dev for a user. Examples of credentials include [device-bound passkeys](https://fidoalliance.org/passkeys/) and [hardware security keys](https://www.yubico.com/products/security-key/). For each credential, the following information is stored:
 
-|Test|Test|
+|Proprety|Description|
 |----|----|
 |`descriptor`|A string of text that identifies the application or service using the credential.|
 |`publicKey`|The shareable, cryptographic key that is used to send data to the API.|
