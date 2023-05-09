@@ -1,8 +1,8 @@
 # Backend API Reference
 
-The **passwordless.dev private API** is used by your backend to initiate key registrations, verify signins, retrieve keys for end-users, and more.
+The **Passwordless.dev private API** is used by your backend to initiate key registrations, verify signins, retrieve keys for end-users, and more.
 
-All requests made to this API **require** your API [private secret](concepts.html#api-keys) in the header for authentication. Requests made to the public API, which are facilitated by methods in the [Javascript client](js-client), will instead require your API [public key](concepts.html#api-keys).
+All requests made to this API **require** your API [private secret](concepts.html#api-keys) in the header for authentication. Requests made to the public API, which are facilitated by methods in the [JavaScript client](js-client), will instead require your API [public key](concepts.html#api-keys).
 
 ## /register/token
 
@@ -39,10 +39,10 @@ const payload = {
   "authenticatorType": "any", // WebAuthn authenticator attachment modality. Can be "any" (default), "platform" which triggers client device-specific options Windows Hello, FaceID, or TouchID, or "cross-platform", which triggers roaming options like security keys.
   "userVerification": "preferred", // Whether the relying party requires locally-invoked authorization for the operation. Can be "preferred" (default), "required", or "optional".
   "aliases": ["pjfry@passwordless.dev"], // An array of user-created identifiers, like emails, which are used to reference a userId.
-  "aliasHashing": true // Whether aliases should be hashed before being stored. Defaults to true
+  "aliasHashing": true // Whether aliases should be hashed before being stored. Defaults to true.
 };
 
-// POST the payload to the passwordless.dev API using your API private secret.
+// POST the payload to the Passwordless.dev API using your API private secret.
 const { token } = await fetch(apiUrl + "/register", {
     method: "POST",
     body: JSON.stringify(payload),
@@ -61,12 +61,12 @@ The request body may include additional parameters besides those required, all o
 |`username`|Required. A human-palatable identifier for a user account. It is intended only for display, i.e., aiding the user in determining the difference between user accounts with similar displayNames. Used in Browser UI's and never stored on the server|`"pjfry@passwordless.dev"`|
 |`displayname`|A human-palatable name for the account, which should be chosen by the user. Used in Browser UI's and never stored on the server. |`"Philip J Fry"`|
 |`attestation`| WebAuthn attestation conveyance preference. Only `"none"` (default) is supported.|`"none"` (default)|
-|`authenticatorType`| WebAuthn authenticator attachment modality. Can be `"any"` (default), `"platform"`, which triggers client device-specific options Windows Hello, FaceID, or TouchID, or `"cross-platform"`, which triggers roaming options like security keys.|`any` (default)
+|`authenticatorType`| WebAuthn authenticator attachment modality. Can be `"any"` (default), `"platform"`, which triggers client device-specific options Windows Hello, FaceID, or TouchID, or `"cross-platform"`, which triggers roaming options like security keys.|`"any"` (default)
 |`discoverable`| If `true`, creates a Client Side Discoverable Credential that allows sign in without needing a username.|`true` (default)|
 |`userVerification`|Allows choosing preference for requiring User Verification (biometrics, pin code etc) when authenticating  Can be `"preferred"` (default), `"required"` or `"discouraged"`.|`"preferred"`
-|`expiresAt`|Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.|`3023-08-01T14:43:03Z`|
+|`expiresAt`|Timestamp (UTC) when the registration token should expire. By default, current time + 120 seconds.|`"3023-08-01T14:43:03Z"`|
 |`aliases`| A array of aliases for the UserId, such as an email or username. Used to initiate a signin on the client side with the `signinWithAlias()` method. An alias must be unique to the UserId. Defaults to an empty array `[]`.|`["pjfry@passwordless.dev"]`|
-|`aliasHashing`|Whether aliases should be hashed before being stored. Defaults to |`true`|
+|`aliasHashing`|Whether aliases should be hashed before being stored. Defaults to `true`.|`true`|
 
 
 ### Response
@@ -105,7 +105,7 @@ const apiUrl = "https://v4.passwordless.dev";
 // Fetch the verification token from your frontend.
 const token = { token: req.query.token };
 
-// POST the verification token to the passwordless.dev API using your API private secret.
+// POST the verification token to the Passwordless.dev API using your API private secret.
 const response = await fetch(apiUrl + "/signin/verify", {
     method: "POST",
     body: JSON.stringify({token}),
@@ -116,7 +116,7 @@ const response = await fetch(apiUrl + "/signin/verify", {
 </template>
 </CodeSwitcher>
 
-The passwordless.dev private API will unpack the verification token to check its legitimacy.
+The Passwordless.dev private API will unpack the verification token to check its legitimacy.
 
 ### Response
 
@@ -168,10 +168,10 @@ const apiUrl = "https://v4.passwordless.dev";
 const payload = {
     "userId": "107fb578-9559-4540-a0e2-f82ad78852f7",
     "aliases": ["pjfry@passwordless.dev", "benderrules@passwordless.dev"],
-    "hashing": true // Whether to hash aliases before stored, defaults to true. Hashed aliases will not be viewable to you in the admin console.
+    "hashing": true // Whether to hash aliases before stored, defaults to true.
 };
 
-// POST the array to the passwordless.dev API using your API private secret.
+// POST the array to the Passwordless.dev API using your API private secret.
 await fetch(apiUrl + "/alias", {
     "method": "POST",
     "body": JSON.stringify(payload),
@@ -217,7 +217,7 @@ const payload = {
     "userId": "107fb578-9559-4540-a0e2-f82ad78852f7"
 };
 
-// POST the userId to the passwordless.dev API using your API private secret
+// POST the userId to the Passwordless.dev API using your API private secret.
 const credentials = await fetch(apiUrl + "/credentials/list", {
     "method": "POST",
     "body": JSON.stringify(payload),
@@ -291,8 +291,9 @@ HTTP API errors will have the following response body:
 -->
 ### Status codes
 
-The API returns HTTP Status codes for each request. 
-In case you receive an error, you will also receive a JSON serialized summary of the error in the form of [Problem Details](errors/#problem-details).
+The API returns HTTP Status codes for each request.
+
+In case you receive an error, you will also receive a JSON serialized summary of the error in the form of [problem details](errors/#problem-details). For more information, see the [Errors page](errors).
 
 |HTTP Code|Message|Status|
 |----|----|----|
@@ -302,8 +303,6 @@ In case you receive an error, you will also receive a JSON serialized summary of
 |401|You did not identify yourself.|🔴|
 |409|Conflict (alias is already in use).|🔴|
 |500|Something went very wrong on our side.|🔴|
-
-For more information, please see our [Errors page](errors)
 
 <!--
 ### Error Codes

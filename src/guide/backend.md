@@ -1,6 +1,6 @@
-# Backend Languages Examples
+# Backend Language Examples
 
-You can use passwordless.dev with any programming language by implementing calls to the passwordless.dev API, but this document will provide some code examples, guidelines, and other help integrating passwordless.dev with popular languages.
+You can use Passwordless.dev with any programming language by implementing calls to the Passwordless.dev API, but this document will provide some code examples, guidelines, and other help integrating Passwordless.dev with popular languages.
 
 ## ASP.NET Core <Badge text="example" type="warning"/>
 
@@ -18,7 +18,7 @@ public async Task<ActionResult<string>> GetRegisterToken(string alias) {
     });
 
     var request = await _httpClient.PostAsync("register/token", new StringContent(json, Encoding.UTF8, "application/json"));
-    
+
     var json = await request.Content.ReadAsStringAsync();
     if (res.IsSuccessStatusCode) {   
         return json; // { "token": "register_xxyyzz..."}    

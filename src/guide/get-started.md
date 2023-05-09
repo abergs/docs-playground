@@ -1,18 +1,18 @@
 # Get Started
 
-Passwordless.dev is a software toolkit that empowers web developers to build applications that easily authenticate end-users using [FIDO2 WebAuthn passkeys](concepts). In this guide, we'll chart the quickest path to implementing passwordless.dev for your website.
+Passwordless.dev is a software toolkit that empowers web developers to build applications that easily authenticate end-users using [FIDO2 WebAuthn passkeys](concepts). In this guide, we'll chart the quickest path to implementing Passwordless.dev for your website.
 
 ::: tip
-This guide will skip over some conceptual basics in order to get you started as quickly as possible. Check out [Concepts](concepts) for in-depth discussion of the ideas used by passwordless.dev.
+This guide will skip over some conceptual basics in order to get you started as quickly as possible. Check out [Concepts](concepts) for in-depth discussion of the ideas used by Passwordless.dev.
 :::
 
-In this guide we'll provide JavaScript examples, however you can check out sample code, guidelines, and tips for other toolkits in [Backend Languages](backend) and [Frontend Frameworks](frontend).
+In this guide we'll provide JavaScript examples, however you can check out sample code, guidelines, and tips for other toolkits in [Backend Language Examples](backend) and [Frontend Framework Exmaples](frontend).
 
 ## Sign up
 
-[Sign up](https://admin.passwordless.dev/signup) for a free passwordless.dev account. Bitwarden offers a free passwordless.dev account, or paid plans that [unlock certain tiers of usage and features](https://bitwarden.com/pricing/passwordless/).
+[Sign up](https://admin.passwordless.dev/signup) for a free Passwordless.dev account. Bitwarden offers a free Passwordless.dev account, or paid plans that [unlock certain tiers of usage and features](http://bitwarden.com/products/passwordless/).
 
-When you sign up you'll land on the [Admin Console](admin-console), your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
+When you sign up you'll land on the [admin console](admin-console), your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
 
 ![Admin console](./admin-console.png)
 
@@ -27,7 +27,7 @@ It's important to download your API keys to a safe place, as they will be remove
 
 ## Install the library
 
-Next, install the [passwordless.dev JavaScript client library](js-client), either globally or as a module within your application. This library will allow your application to interact with the passwordless.dev API and with browsers' WebAuthn API. To install the library:
+Next, install the [Passwordless.dev JavaScript client library](js-client), either globally or as a module within your application. This library will allow your application to interact with the Passwordless.dev API and with browsers' WebAuthn API. To install the library:
 
 
 <CodeSwitcher :languages="{bash1:'yarn',bash2:'npm',es6:'ES6',html:'html'}">
@@ -36,7 +36,7 @@ Next, install the [passwordless.dev JavaScript client library](js-client), eithe
 ```bash
 yarn add @passwordlessdev/passwordless-client
 ```
-In all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by Passwordless.dev:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
 ```
@@ -46,7 +46,7 @@ import { Client } from '@passwordlessdev/passwordless-client';
 ```bash
 npm install @passwordlessdev/passwordless-client
 ```
-In all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by Passwordless.dev:
 ```js
 import { Client } from '@passwordlessdev/passwordless-client';
 ```
@@ -56,7 +56,7 @@ import { Client } from '@passwordlessdev/passwordless-client';
 ```html
 <script src="https://cdn.passwordless.dev/dist/1.1.0/esm/passwordless.min.mjs" crossorigin="anonymous"></script>
 ```
-In all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by Passwordless.dev:
 ```html
 <script type="module">
     import { Client } from "https://cdn.passwordless.dev/dist/1.1.0/esm/passwordless.min.mjs"
@@ -68,7 +68,7 @@ In all cases, your frontend must import the library to call the methods used by 
 ```html
 <script src="https://cdn.passwordless.dev/dist/1.1.0/umd/passwordless.umd.min.js" crossorigin="anonymous"></script>
 ```
-In all cases, your frontend must import the library to call the methods used by passwordless.dev:
+In all cases, your frontend must import the library to call the methods used by Passwordless.dev:
 ```html
 <script>
 const Client = Passwordless.Client;
@@ -85,12 +85,9 @@ Next, implement a workflow on your backend and frontend for registering a [passk
 
 ![Register credential workflow](./register-diagram.png)
 
-Let's break down these 3 steps:
+Let's break down these steps:
 
-
-1. On your backend, generate a [registration token](api#register-token) by calling the passwordless.dev API's `/register/token` endpoint ([What is a token?](concepts/#tokens)).
-
-While you can send in a number of options, The minimum arguments are `userId` and `username` for the user, for example:
+1. On your backend, generate a [registration token](api#register-token) by calling the passwordless.dev API's `/register/token` endpoint ([What is a token?](concepts/#tokens)). While you can send in a number of options, the minimum arguments are `userId` and `username`, for example:
 
 <Badge text="backend" type="warning"/>
 
@@ -101,10 +98,10 @@ While you can send in a number of options, The minimum arguments are `userId` an
 const payload = {
   "userId": "107fb578-9559-4540-a0e2-f82ad78852f7", // Required. A WebAuthn User Handle, which should be generated by your application. Max. 64 bytes.
   "username": "pjfry@passwordless.dev", // Required. A human readable username used for user authentication, should be chosen by the user.
-  // ...there are more options, please see the API reference for /register/token
+  // ...For more options, please see the API reference for /register/token.
 };
 
-// POST the payload to the passwordless.dev API using your API private secret.
+// POST the payload to the Passwordless.dev API using your API private secret.
 const apiUrl = "https://v4.passwordless.dev";
 const {token} = await fetch(apiUrl + "/register/token", {
     method: "POST",
@@ -123,10 +120,8 @@ Successful implementation will create a registration token returned that is retu
 ```
 
 ::: tip
-Should your API request fail, you will receive a error response with json formatted [Problem Details](errors)
+Should your API request fail, you will receive a error response with `json`-formatted [Problem Details](errors).
 :::
-
-
 
 2. On your frontend, initiate the WebAuthn process to create and store a WebAuthn credential using the generated registration token ([learn more](js-client)), for example:
 
@@ -142,20 +137,19 @@ const p = new Client({
 });
 
 // Fetch the returned registration token from the backend.
-const backendUrl = "https://localhost:7002"; // Your backend
+const backendUrl = "https://localhost:7002"; // Your backend.
 const registerToken = await fetch(backendUrl + "/create-user").then(r => r.json());
 
 // Register the token with the end-user's device.
 const {token, error} = await p.register(registerToken);
 if(token) {
-    // successfully registered
+    // Successfully registered!
 } else {
     console.error(error);
 }
-
 ```
 
-Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
+Successful implementation will prompt Passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
 
 ## Build a signin flow
 
@@ -165,7 +159,7 @@ Next, implement a workflow on your backend and frontend for signing in with a [p
 
 Code that you write must:
 
-1. On your frontend, initiate your signin and retrieve a [verification token](concepts.html#tokens) that will be checked by your backend to complete a sign-in. To initiate the signin, you can use an alias, userId or a Discoverable credential  ([learn more](js-client.html#signin)), for example:
+1. On your frontend, initiate your sign-in and retrieve a [verification token](concepts.html#tokens) that will afterward be checked by your backend to complete a sign-in. To initiate the sign-in, you can use an alias, userId, or Discoverable Credential  ([learn more](js-client.html#signin)), for example:
 
 <Badge text="frontend" type="tip"/>
 
@@ -182,19 +176,19 @@ const alias = "pjfry@passwordless.dev";
 
 // Generate a verification token for the user.
 const {token, error} = await p.signinWithAlias(alias);
-// tip: You can also try p.signinWithDiscoverable();
+// Tip: You can also try p.signinWithDiscoverable();
 
 // Call your backend to verify the generated token.
-const backendUrl = "https://localhost:7002"; // Your backend
+const backendUrl = "https://localhost:7002"; // Your backend.
 const verifiedUser = await fetch(backendUrl + "/signin?token=" + token).then(r => r.json());
 if(verifiedUser.success === true) {
   // If successful, proceed!
 }
 ```
 
-Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (step 2 in the picture) before proceeding to act on the confirmed sign-in
+Successful implementation will make a verification token available to the backend. In the above example, the client waits for the backend to return `true` (**step 2**) before proceeding to act on the confirmed sign-in.
 
-2. Validate the verification token by calling the passwordless.dev API's `/signin/verify` endpoint ([learn more](api.html/#signin-verify)) with generated token, for example:
+2. Validate the verification token by calling the Passwordless.dev API's `/signin/verify` endpoint ([learn more](api.html/#signin-verify)) with generated token, for example:
 
 <Badge text="backend" type="warning"/>
 
@@ -204,7 +198,7 @@ Successful implementation will make a verification token available to the backen
 // Fetch the verification token from your frontend.
 const token = { token: req.query.token };
 
-// POST the verification token to the passwordless.dev API using your API private secret.
+// POST the verification token to the Passwordless.dev API using your API private secret.
 const apiUrl = "https://v4.passwordless.dev";
 const response = await fetch(apiurl + "/signin/verify", {
     method: "POST",
@@ -216,10 +210,10 @@ const response = await fetch(apiurl + "/signin/verify", {
 const body = await response.json();
 
 // Check the API response for successful verification.
-// To see all properties returned by this endpoint, checkout the Backend API reference for /signin/verify
+// To see all properties returned by this endpoint, checkout the Backend API Reference for /signin/verify.
 if (body.success) {
     console.log("Successfully verified sign-in for user.", body);
-    // set cookie/userid
+    // Set a cookie/userid.
 } else {
     console.warn("Sign in failed.", body);
 }
@@ -242,11 +236,11 @@ Successful implementation of the above `POST` will return a success response inc
 }
 ```
 
-Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in (**step 1**) byt setting a cookie etc.
+Use the `.success` value (`true` or `false`) to determine next actions, i.e. whether to complete the sign-in (**step 1**) by, for example, setting a cookie.
 
 ## Next steps
 
-Congratulations on mastering a basic implementation of passwordless.dev! Next:
+Congratulations on mastering a basic implementation of Passwordless.dev! Next:
 
 - Check out other [Backend Languages](backend) and [Frontend Frameworks](frontend) to find the best fit for your application.
 - Dig into the functionality offered by the [Admin Console](admin-console).

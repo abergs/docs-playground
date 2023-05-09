@@ -14,7 +14,7 @@ The Passwordless.dev architecture consists of three key parts:
 - A public RESTful API, used by the client-side library to complete FIDO2 WebAuthn cryptographic exchanges with the browser.
 - A [private RESTful API](api), used by your backend to initiate key registrations, verify signins, and retrieve keys for end-users.
 
-All of the code is [open source](https://github.com/passwordless)
+All Passwordless.dev code is [open source](https://github.com/passwordless).
 
 ::: tip
 For more information on the principles that support Passwordless.dev, check out [Concepts](concepts). If you are ready to start using Passwordless.dev, visit [Get Started](get-started) for step-by-step instructions.

@@ -36,11 +36,11 @@ The **Settings** page will offer some options for configuring your application, 
 
 ### Playground
 
-The **Playground** page gives access to a simple Passwordless demo you can use for testing devices.
+The **Playground** page gives access to a simple passwordless demo you can use for testing devices.
 
 ## Billing
 
-The **Billing** page allows you to upgrade to a paid organization and view a list of applications attached to your account. 
+The **Billing** page allows you to upgrade to a paid organization and view a list of applications attached to your account.
 
 ## Admins
 

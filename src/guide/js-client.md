@@ -3,7 +3,7 @@ title: Frontend JS Client Reference
 ---
 # Frontend JavaScript Client Reference
 
-The passwordless.dev JavaScript client is used by your frontend to complete FIDO2 WebAuthn cryptographic exchanges with the browser.
+The Passwordless.dev JavaScript client is used by your frontend to complete FIDO2 WebAuthn cryptographic exchanges with the browser.
 
 All methods **require** your API [public key](concepts.html#api-keys) for authentication. Requests made to the [private API](api) will instead require your API [private secret](concepts.html#api-keys).
 
@@ -78,7 +78,7 @@ const registerToken = await fetch(backendUrl + "/create-token?userId" + userId).
 const { token, error } = await p.register(registerToken);
 ```
 
-Successful implementation will prompt passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
+Successful implementation will prompt Passwordless.dev to negotiate creation of a WebAuthn credential through the user's web browser API and save its public key to the database for future sign-in operations.
 
 ## .signinWith()
 
@@ -130,7 +130,7 @@ if(verifiedUser.success === true) {
 
 ### Response
 
-All `.signinWith*()` methods return a object with two properties, commonly destrucuted as:
+All `.signinWith*()` methods return a object with two properties, commonly destructured as:
 ```
 // destructured
 const { token, error } = await p.siginWithId(123)
@@ -142,7 +142,7 @@ console.log(signinResponse.error) // undefined or a Problem Details object
 
 ```
 
-If the signin was successful, the `token` has a string value `"verify_xxyyzz`. If the signin failed, the `error` property contains the [problem details](errors.html#problem-details).
+If the signin was successful, the `token` has a string value `"verify_xxyyzz"`. If the sign-in failed, the `error` property contains the [problem details](errors.html#problem-details).
 
 ## .isBrowserSupported()
 
