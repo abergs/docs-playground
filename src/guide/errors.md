@@ -47,8 +47,20 @@ You receive this error when you call `p.signinWith*()` but the passkey that was 
 
 The solution is to remove the passkey from the user device. This can be done in the Browser's settings or on the Operating Systems Credential Manager.
 
-### alias_used
+### missing_userid
+
+You receive this error while calling `/register/token` and fail to supply the UserId property in the json payload. 
 
 ##### Reason
+When creating a reigster_token you must supply a valid UserId.
 
 ##### Solution
+
+Add a UserId to your payload, e.g:
+
+```json5
+{
+  "UserId": "123",
+  "Username": "pjfry@passwordless.dev"
+}
+```
