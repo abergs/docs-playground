@@ -75,3 +75,15 @@ The token you're trying to use have expired. By default, tokens are only valid f
 ##### Solution
 
 Make sure you use your tokens immediately when they are being created. Tokens are meant to be short lived. If your use case requires it, the expiration can be configured when creating the token.
+
+
+### alias_conflict
+
+You receive this error if you're trying to set or update the aliases of a user.
+
+##### Reason
+The alias you are trying to use is already being used by a different UserId.
+
+##### Solution
+
+You need to use a unique alias per userId. You can remove the alias from an existing user by calling the `/alias` endpoint.
