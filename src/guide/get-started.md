@@ -10,7 +10,7 @@ In this guide we'll provide JavaScript examples, however you can check out sampl
 
 ## Sign up
 
-[Sign up](https://admin.passwordless.dev/signup) for a free Passwordless.dev account. Bitwarden offers a free Passwordless.dev account, or paid plans that [unlock certain tiers of usage and features](http://bitwarden.com/products/passwordless/).
+[Sign up](https://admin.passwordless.dev/signup) for a free Passwordless.dev account. Bitwarden offers a free Passwordless.dev account, or paid plans that unlock certain tiers of usage and features.
 
 When you sign up you'll land on the [admin console](admin-console), your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
 </br>

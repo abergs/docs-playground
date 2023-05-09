@@ -1,6 +1,6 @@
 # Admin Console
 
-The [Admin Console](https://adminconsole-devtest.azurewebsites.net/Account/Login) is your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
+The [Admin Console](https://admin.passwordless.dev/) is your primary GUI for creating and configuring applications, monitoring application usage, and managing billing:
 
 ![Admin console](./admin-console.png)
 
