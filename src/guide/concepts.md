@@ -68,9 +68,9 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 
 |Proprety|Description|
 |----|----|
-|`descriptorId`|A string of text that identifies the application or service using the credential. Also refered to as the `credentialId`|
-|`publicKey`|The shareable, cryptographic key that is used to send data to the API.|
-|`userId`|The unique identifier that is associated with a specific user account. It can be used to retreive information about the user.|
+|`descriptorId`|A Base64Url string representation of the bytarray that identifies the specific credential. Also refered to as the `credentialId`|
+|`publicKey`|The credentials public key, used to cryptographically verify the authentication. Note: Knowing the public key **does not** give access to an account/credential.|
+|`userId`|The unique identifier that is associated with a specific user account. It can be used to retreive information about the user. E.g. `123`|
 |`signatureCounter`|The number of times this credential has been used for authentication.|
 |`createdAt`|Timestamp (UTC) when the credential was registered for the application.|
 |`aaGuid`|The Authenticator Attestation GUID is a unique identifier that is used to identify your authenticator when it is registered.|
