@@ -293,12 +293,12 @@ HTTP API errors will have the following response body:
 
 |HTTP Code|Message|Status|
 |----|----|----|
-|200|Everything is OK.|:green_circle:|
-|201|Everything is OK but empty.|:yellow_circle:|
-|400|Bad request.|:red_circle:|
-|401|You did not identify yourself.|:red_circle:|
-|409|Conflict (alias is already in use).|:red_circle:|
-|500|Something went very wrong and we have a bug.|:red_circle:|
+|200|Everything is OK.|✅|
+|201|Everything is OK but empty.|✅|
+|400|Bad request.|🔴|
+|401|You did not identify yourself.|🔴|
+|409|Conflict (alias is already in use).|🔴|
+|500|Something went very wrong and we have a bug.|🔴|
 
 <!--
 ### Error Codes
