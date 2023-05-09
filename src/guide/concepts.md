@@ -82,7 +82,7 @@ A credential represents a FIDO2 authenticator that is registered by passwordless
 
 ### Dicoverable Credential
 
-A Discoverable Credential is discoverable and usable in authentication without the server needing to provide a credentialId first. This means that you does not necessarily need to first identify the user, making it even simpler to sign in (even without user email/username)
+A Discoverable Credential is discoverable and usable in authentication without the server needing to provide a `credentialId` first. This means that you does not necessarily need to first identify the user, making it even simpler to sign in (even without user email/username)
 
 ### Tokens
 In the regular course of business, passwordless.dev uses two important types of ephemeral tokens:
