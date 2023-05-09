@@ -291,6 +291,9 @@ HTTP API errors will have the following response body:
 -->
 ### Status codes
 
+The API returns HTTP Status codes for each request. 
+In case you receive an error, you will also receive a JSON serialized summary of the error in the form of [Problem Details](errors/#problem-details).
+
 |HTTP Code|Message|Status|
 |----|----|----|
 |200|Everything is OK.|✅|
@@ -298,7 +301,9 @@ HTTP API errors will have the following response body:
 |400|Bad request.|🔴|
 |401|You did not identify yourself.|🔴|
 |409|Conflict (alias is already in use).|🔴|
-|500|Something went very wrong and we have a bug.|🔴|
+|500|Something went very wrong on our side.|🔴|
+
+For more information, please see our [Errors page](errors)
 
 <!--
 ### Error Codes
