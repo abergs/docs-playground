@@ -45,11 +45,13 @@ Registering an application with the [passwordless.dev admin console](get-started
 - **ApiKey**: A public API key, safe and intended to be included client side. It allows the browser to connect to out backend and initiate key negotiations and assertions. Public API keys are in the format:
   ```
   <application-name>:public:<guid>
+  //e.g. myapp:public:a28e285ec8b64ca58a3dec90c5af48c2
   ```
 - **ApiSecret**: A private API key, or private secret, that should be well protected. It allows your backend to verify sign-ins and register keys on behalf of your users. Private API secrets are in the format:
 
   ```
   <application-name>:secret:<guid>
+  //e.g. myapp:secret:42cd551fb288371812596e211fbc2a5a
   ```
 
 ### Passkey
