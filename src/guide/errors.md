@@ -33,9 +33,9 @@ if(error) {
 
 <dl>
   <dt>Reason</dt>
-  <dd>You receive this error when you call `p.register(registerToken)` but the value of `registerToken` is empty or invalid.</dd>
+  <dd>You receive this error when you call <code>p.register(registerToken)</code> but the value of <code>registerToken</code> is empty or invalid.</dd>
   <dt>Solution</dt>
-  <dd>Make sure you have an expected value in your `registerToken`. Obtain a register token from your backend by calling the `/register/token`  endpoint. It should start with `register_`.</dd>
+  <dd>Make sure you have an expected value in your <code>registerToken</code>. Obtain a register token from your backend by calling the <code>/register/token</code> endpoint. It should start with <code>register_</code>.</dd>
 </dl>
 
 
@@ -43,7 +43,7 @@ if(error) {
 
 <dl>
   <dt>Reason</dt>
-  <dd>You receive this error when you call `p.signinWith*()` but the passkey that was used is not registered in our system. This can happen if the passkey has been deleted on the server (e.g. removing it in your app UI or the Admin Console) but still exists on a users device.</dd>
+  <dd>You receive this error when you call <code>p.signinWith*()</code> but the passkey that was used is not registered in our system. This can happen if the passkey has been deleted on the server (e.g. removing it in your app UI or the Admin Console) but still exists on a users device.</dd>
   <dt>Solution</dt>
   <dd>Remove the passkey from the user device. This can be done in the browser's settings or on the operating system's credential manager.</dd>
 </dl>
@@ -52,7 +52,7 @@ if(error) {
 
 <dl>
   <dt>Reason</dt>
-  <dd>You receive this error while calling `/register/token` and fail to supply the userId property in the `json` payload.<dd>
+  <dd>You receive this error while calling <code>/register/token</code> and fail to supply the userId property in the <code>json</code> payload.<dd>
   <dt>Solution</dt>
   <dd>When creating a register_token you must supply a valid userId.</dd>
  </dl>
@@ -90,7 +90,7 @@ You may receive this error when you're trying to use a token to:
   <dt>Reason</dt>
   <dd>The alias you are trying to use is already being used by a different userId.</dd>
   <dt>Solution</dt>
-  <dd>You need to use a unique alias per userId. You can remove the alias from an existing user by calling the `/alias` endpoint.</dd>
+  <dd>You need to use a unique alias per userId. You can remove the alias from an existing user by calling the <code>/alias</code> endpoint.</dd>
  </dl>
  
 <!--- definition list HTML
