@@ -31,28 +31,33 @@ if(error) {
 
 ### missing_register_token
 
-|Reason|Solution|
-|----|----|
-|You receive this error when you call `p.register(registerToken)` but the value of `registerToken` is empty or invalid.|Make sure you have an expected value in your `registerToken`. Obtain a register token from your backend by calling the `/register/token` endpoint. It should start with `register_`.|
-
-
-
+<dl>
+  <dt>Reason</dt>
+  <dd>You receive this error when you call `p.register(registerToken)` but the value of `registerToken` is empty or invalid.</dd>
+  <dt>Solution</dt>
+  <dd>Make sure you have an expected value in your `registerToken`. Obtain a register token from your backend by calling the `/register/token`  endpoint. It should start with `register_`.</dd>
+</dl>
 
 
 ### unknown_credential
 
-|Reason|Solution|
-|----|----|
-|You receive this error when you call `p.signinWith*()` but the passkey that was used is not registered in our system.</br>This can happen if the passkey has been deleted on the server (e.g. removing it in your app UI or the Admin Console) but still exists on a users device.|Remove the passkey from the user device. This can be done in the browser's settings or on the operating system's credential manager.|
+<dl>
+  <dt>Reason</dt>
+  <dd>You receive this error when you call `p.signinWith*()` but the passkey that was used is not registered in our system. This can happen if the passkey has been deleted on the server (e.g. removing it in your app UI or the Admin Console) but still exists on a users device.</dd>
+  <dt>Solution</dt>
+  <dd>Remove the passkey from the user device. This can be done in the browser's settings or on the operating system's credential manager.</dd>
+</dl>
 
 ### missing_userid
 
+<dl>
+  <dt>Reason</dt>
+  <dd>You receive this error while calling `/register/token` and fail to supply the userId property in the `json` payload.<dd>
+  <dt>Solution</dt>
+  <dd>When creating a register_token you must supply a valid userId.</dd>
+ </dl>
 
-|Reason|Solution|
-|----|----|
-|You receive this error while calling `/register/token` and fail to supply the userId property in the `json` payload.|When creating a register_token you must supply a valid userId.|
-
-**Solution example**
+example:
 
 Add a userId to your payload, e.g:
 
@@ -69,15 +74,30 @@ You may receive this error when you're trying to use a token to:
 * register a passkey
 * verify a sign-in
 
-|Reason|Solution|
-|----|----|
-|The token you're trying to use has expired. By default, tokens are only valid for 120 seconds.|Make sure you use your tokens immediately when they are being created. Tokens are meant to be short-lived. If your use case requires it, the expiration can be configured when creating the token.|
+<dl>
+  <dt>Reason</dt>
+  <dd>The token you're trying to use has expired. By default, tokens are only valid for 120 seconds.</dd>
+  <dt>Solution</dt>
+  <dd>Make sure you use your tokens immediately once they are have been created. Tokens are meant to be short-lived. If your use case requires it, the expiration can be configured while creating the token.</dd>
+</dl>
 
 
 ### alias_conflict
 
-You receive this error if you're trying to set or update the aliases of a user.
+* You receive this error if you are trying to set or update the aliases of a user.
 
-|Reason|Solution|
-|----|----|
-|The alias you are trying to use is already being used by a different userId.|You need to use a unique alias per userId. You can remove the alias from an existing user by calling the `/alias` endpoint.|
+<dl>
+  <dt>Reason</dt>
+  <dd>The alias you are trying to use is already being used by a different userId.</dd>
+  <dt>Solution</dt>
+  <dd>You need to use a unique alias per userId. You can remove the alias from an existing user by calling the `/alias` endpoint.</dd>
+ </dl>
+ 
+<!--- definition list HTML
+<dl>
+  <dt>Reason</dt>
+  <dd>definition</d>
+  <dt>Solution</dt>
+  <dd>definition</dd>
+</dl> 
+-->
